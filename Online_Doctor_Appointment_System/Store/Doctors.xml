@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<ArrayOfDoctor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Doctor>
+    <PersonId>1</PersonId>
+    <Name>Александр</Name>
+    <Surname>Иванов</Surname>
+    <Patronymic>Петрович</Patronymic>
+    <SpecializationId>1</SpecializationId>
+    <Specialization>
+      <SpecializationId>1</SpecializationId>
+      <SpecializationTitle>Терапевт</SpecializationTitle>
+      <SpecializationDescription>Врач общей практики, занимается лечением распространенных заболеваний</SpecializationDescription>
+    </Specialization>
+    <LicenseNumber>123456</LicenseNumber>
+    <Experience>15</Experience>
+  </Doctor>
+  <Doctor>
+    <PersonId>2</PersonId>
+    <Name>Елена</Name>
+    <Surname>Смирнова</Surname>
+    <Patronymic>Александровна</Patronymic>
+    <SpecializationId>2</SpecializationId>
+    <Specialization>
+      <SpecializationId>2</SpecializationId>
+      <SpecializationTitle>Хирург</SpecializationTitle>
+      <SpecializationDescription>Специалист по оперативному лечению заболеваний и травм</SpecializationDescription>
+    </Specialization>
+    <LicenseNumber>654321</LicenseNumber>
+    <Experience>12</Experience>
+  </Doctor>
+  <Doctor>
+    <PersonId>3</PersonId>
+    <Name>Дмитрий</Name>
+    <Surname>Кузнецов</Surname>
+    <Patronymic>Сергеевич</Patronymic>
+    <SpecializationId>3</SpecializationId>
+    <Specialization>
+      <SpecializationId>3</SpecializationId>
+      <SpecializationTitle>Кардиолог</SpecializationTitle>
+      <SpecializationDescription>Врач, специализирующийся на заболеваниях сердечно-сосудистой системы</SpecializationDescription>
+    </Specialization>
+    <LicenseNumber>789012</LicenseNumber>
+    <Experience>8</Experience>
+  </Doctor>
+  <Doctor>
+    <PersonId>4</PersonId>
+    <Name>Ольга</Name>
+    <Surname>Попова</Surname>
+    <Patronymic>Владимировна</Patronymic>
+    <SpecializationId>4</SpecializationId>
+    <Specialization>
+      <SpecializationId>4</SpecializationId>
+      <SpecializationTitle>Невролог</SpecializationTitle>
+      <SpecializationDescription>Специалист по заболеваниям нервной системы</SpecializationDescription>
+    </Specialization>
+    <LicenseNumber>345678</LicenseNumber>
+    <Experience>20</Experience>
+  </Doctor>
+  <Doctor>
+    <PersonId>5</PersonId>
+    <Name>Михаил</Name>
+    <Surname>Васильев</Surname>
+    <Patronymic>Игоревич</Patronymic>
+    <SpecializationId>5</SpecializationId>
+    <Specialization>
+      <SpecializationId>5</SpecializationId>
+      <SpecializationTitle>Педиатр</SpecializationTitle>
+      <SpecializationDescription>Врач, занимающийся лечением детей</SpecializationDescription>
+    </Specialization>
+    <LicenseNumber>901234</LicenseNumber>
+    <Experience>5</Experience>
+  </Doctor>
+</ArrayOfDoctor>

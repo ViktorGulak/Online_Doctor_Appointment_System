@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfSpecialization xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                       xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Specialization>
+    <SpecializationId>1</SpecializationId>
+    <SpecializationTitle>Терапевт</SpecializationTitle>
+    <SpecializationDescription>Врач общей практики, занимается лечением распространенных заболеваний</SpecializationDescription>
+  </Specialization>
+  <Specialization>
+    <SpecializationId>2</SpecializationId>
+    <SpecializationTitle>Хирург</SpecializationTitle>
+    <SpecializationDescription>Специалист по оперативному лечению заболеваний и травм</SpecializationDescription>
+  </Specialization>
+  <Specialization>
+    <SpecializationId>3</SpecializationId>
+    <SpecializationTitle>Кардиолог</SpecializationTitle>
+    <SpecializationDescription>Врач, специализирующийся на заболеваниях сердечно-сосудистой системы</SpecializationDescription>
+  </Specialization>
+  <Specialization>
+    <SpecializationId>4</SpecializationId>
+    <SpecializationTitle>Невролог</SpecializationTitle>
+    <SpecializationDescription>Специалист по заболеваниям нервной системы</SpecializationDescription>
+  </Specialization>
+  <Specialization>
+    <SpecializationId>5</SpecializationId>
+    <SpecializationTitle>Педиатр</SpecializationTitle>
+    <SpecializationDescription>Врач, занимающийся лечением детей</SpecializationDescription>
+  </Specialization>
+</ArrayOfSpecialization>

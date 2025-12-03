@@ -1,0 +1,174 @@
+﻿<Window x:Class="Online_Doctor_Appointment_System.Views.DoctorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Online_Doctor_Appointment_System.Views"
+        mc:Ignorable="d"
+        Title="Доктора" Height="770" Width="1100" WindowState="Maximized">
+    <Grid Background="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionBrushKey}}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Первый GroupBox -->
+            <RowDefinition Height="Auto"/>
+            <!-- Второй GroupBox -->
+            <RowDefinition Height="Auto"/>
+            <!-- Кнопки -->
+            <RowDefinition Height="*"/>
+            <!-- Запасное пространство -->
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="*"/>
+            <!-- DataGrid займет всё оставшееся пространство -->
+        </Grid.ColumnDefinitions>
+
+        <!-- Первый GroupBox с данными -->
+        <GroupBox Grid.Row="0" Grid.Column="0" Header="Данные врача" Margin="5" FontSize="16" Foreground="#FF7B16B6" BorderBrush="#FF7B16B6">
+            <StackPanel Margin="10">
+                <!-- 4 TextBox в 2 колонки -->
+                <!-- Левый столбец -->
+                <StackPanel Margin="0,5">
+                    <Label Content="Фамилия" FontSize="16" Foreground="#FF7B16B6"/>
+                    <TextBox Style="{StaticResource PrimaryTB}" Name="DocSurnameTB"/>
+                </StackPanel>
+                <StackPanel Margin="0,5">
+                    <Label Content="Имя" FontSize="16" Foreground="#FF7B16B6"/>
+                    <TextBox Style="{StaticResource PrimaryTB}" Name="DocNameTB"/>
+                </StackPanel>
+                <StackPanel Margin="0,5">
+                    <Label Content="Отчество" FontSize="16" Foreground="#FF7B16B6"/>
+                    <TextBox Style="{StaticResource PrimaryTB}" Name="DocPatronymicTB"/>
+                </StackPanel>
+
+                <Grid Margin="0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" Margin="0,5">
+                        <Label Content="Номер лицензии" FontSize="16" Foreground="#FF7B16B6"/>
+                        <TextBox Style="{StaticResource PrimaryTB}" Name="LicenseNumberTB"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2" Margin="0,5">
+                        <Label Content="Стаж" FontSize="16" Foreground="#FF7B16B6"/>
+                        <TextBox Style="{StaticResource PrimaryTB}" Name="ExperienceTB"/>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </GroupBox>
+
+        <!-- Второй GroupBox с адресом -->
+        <GroupBox Grid.Row="1" Grid.Column="0" Header="Специальность" Margin="5" FontSize="16" Foreground="#FF7B16B6" BorderBrush="#FF7B16B6">
+            <StackPanel Margin="10">
+                <!-- 4 TextBox в 2 колонки -->
+                <Grid Margin="0,10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0" Margin="0,5">
+                        <Label Content="Название" FontSize="16" Foreground="#FF7B16B6"/>
+                        <ComboBox Style="{StaticResource PrimaryCB}" Name="SpecTitleCB" SelectionChanged="SpecTitleCB_SelectionChanged"
+                            TextSearch.TextPath="SpecializationTitle"
+                            IsEditable="True"
+                        />
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="1" Margin="0,5">
+                        <Label Content="Описание" FontSize="16" Foreground="#FF7B16B6"/>
+                        <TextBox Style="{StaticResource PrimaryTB}" Name="SpecDescriptionTB" UndoLimit="150" 
+                                 IsReadOnly="True"
+                                 TextWrapping="Wrap"
+                                 VerticalScrollBarVisibility="Auto"
+                        />
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </GroupBox>
+
+        <!-- Кнопки под GroupBox -->
+        <StackPanel Grid.Row="2" Grid.Column="0" Margin="5">
+            <UniformGrid Columns="2" Margin="0,10">
+                <Button Content="Добавить"
+                    Name="AddDoctorBtn"
+                    Style="{StaticResource PrimaryBtn}"
+                    Margin="5"
+                    Padding="15,7" 
+                    FontSize="14" Click="AddDoctorBtn_Click" />
+                <Button Content="Изменить"
+                    Name="UpdateDoctorBtn"
+                    Style="{StaticResource SuccessBtn}"
+                    Margin="5"
+                    Padding="15,7" 
+                    FontSize="14" Click="UpdateDoctorBtn_Click"/>
+                <Button Content="Очистить"
+                    Name="ClearDoctorBtn"
+                    Style="{StaticResource WarningBtn}"
+                    Margin="5"
+                    Padding="15,7" 
+                    FontSize="14" Click="ClearDoctorBtn_Click"/>
+                <Button Content="Удалить"
+                    Name="DeleteDoctorBtn"
+                    Style="{StaticResource DangerBtn}"
+                    Margin="5"
+                    Padding="15,7" 
+                    FontSize="14" Click="DeleteDoctorBtn_Click"/>
+            </UniformGrid>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Margin="10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="Поиск" FontSize="20" Foreground="#FF7B16B6" Grid.Column="0"/>
+                <TextBox Style="{StaticResource PrimaryTB}" Name="DocSearchTB" Grid.Column="2" Margin="0, 0, 10, 0" TextChanged="DocSearchTB_TextChanged"/>
+            </Grid>
+            <DataGrid Grid.Column="1" Grid.RowSpan="4"
+              Margin="5" 
+              Name="PersonsDG" 
+              AutoGenerateColumns="False" 
+              IsReadOnly="True"
+              Style="{StaticResource PrimaryDataGrid}" SelectionChanged="PersonsDG_SelectionChanged">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ФИО" 
+                        Binding="{Binding FullName}" 
+                        Width="200"
+                        HeaderStyle="{StaticResource PrimaryDataGridColumnHeader}"
+                        ElementStyle="{StaticResource PrimaryDataGridCellText}"
+                        CellStyle="{StaticResource PrimaryDataGridCell}"/>
+                    <DataGridTextColumn Header="№ Лицензии" 
+                        Binding="{Binding LicenseNumber}" 
+                        Width="100"
+                        HeaderStyle="{StaticResource PrimaryDataGridColumnHeader}"
+                        ElementStyle="{StaticResource PrimaryDataGridCellText}"
+                        CellStyle="{StaticResource PrimaryDataGridCell}"/>
+                    <DataGridTextColumn Header="Стаж" 
+                        Binding="{Binding Experience}" 
+                        Width="60"
+                        HeaderStyle="{StaticResource PrimaryDataGridColumnHeader}"
+                        ElementStyle="{StaticResource PrimaryDataGridCellText}"
+                        CellStyle="{StaticResource PrimaryDataGridCell}"/>
+                    <DataGridTextColumn Header="Специальность" 
+                        Binding="{Binding SpecializationTitle}" 
+                        Width="100"
+                        HeaderStyle="{StaticResource PrimaryDataGridColumnHeader}"
+                        ElementStyle="{StaticResource PrimaryDataGridCellText}"
+                        CellStyle="{StaticResource PrimaryDataGridCell}"/>
+                    <DataGridTextColumn Header="Описание" 
+                        Binding="{Binding DoctorSpecialization.SpecializationDescription}" 
+                        Width="*"
+                        HeaderStyle="{StaticResource PrimaryDataGridColumnHeader}"
+                        ElementStyle="{StaticResource PrimaryDataGridCellText}"
+                        CellStyle="{StaticResource PrimaryDataGridCell}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+        <!-- DataGrid -->
+        
+    </Grid>
+</Window>

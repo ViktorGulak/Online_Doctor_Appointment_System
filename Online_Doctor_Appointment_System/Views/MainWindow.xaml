@@ -1,0 +1,33 @@
+﻿<Window x:Class="Online_Doctor_Appointment_System.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Online_Doctor_Appointment_System"
+        mc:Ignorable="d"
+        Title="Меню" Height="400" Width="450" ResizeMode="NoResize">
+    <Grid Background="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionBrushKey}}">
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition ></RowDefinition>
+            <RowDefinition ></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Button Margin="20" Grid.Row="0" Content="Список мед. работников" Name="MedicalWorkersBtn" 
+                FontSize="20" 
+                Style="{StaticResource PrimaryBtn}" Click="MedicalWorkersBtn_Click">
+        </Button>
+        <Button Margin="20" Grid.Row="1" Content="Регистрация пациентов" Name="PatientBtn"
+                FontSize="20" 
+                Style="{StaticResource PrimaryBtn}">
+        </Button>
+        <Button Margin="20" Grid.Row="2" Content="Записи к врачу"  
+                FontSize="20" Name="MedicalAppointmentsBtn"
+                Style="{StaticResource PrimaryBtn}">
+        </Button>
+        <Button Margin="20" Grid.Row="3" Content="Статистика"  
+                FontSize="20" Name="Statistic"
+                Style="{StaticResource PrimaryBtn}">
+        </Button>
+    </Grid>
+</Window>
