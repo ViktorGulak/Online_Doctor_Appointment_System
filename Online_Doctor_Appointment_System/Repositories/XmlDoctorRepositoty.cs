@@ -84,7 +84,7 @@ namespace Online_Doctor_Appointment_System.Repositories
             try
             {
                 // Перед сохранением обновляем SpecializationId из объекта
-                foreach (var doctor in _doctors)
+                foreach (Doctor doctor in _doctors)
                 {
                     if (doctor.DoctorSpecialization != null)
                     {
@@ -131,7 +131,7 @@ namespace Online_Doctor_Appointment_System.Repositories
             if (doctor == null)
                 throw new ArgumentNullException(nameof(doctor));
 
-            var existing = GetById(doctor.PersonId);
+            Doctor existing = GetById(doctor.PersonId);
             if (existing == null)
                 throw new KeyNotFoundException($"Врач с ID {doctor.PersonId} не найден");
 
@@ -146,7 +146,7 @@ namespace Online_Doctor_Appointment_System.Repositories
 
         public void Delete(long id)
         {
-            var doctor = GetById(id);
+            Doctor doctor = GetById(id);
             if (doctor == null)
                 throw new KeyNotFoundException($"Врач с ID {id} не найден");
 

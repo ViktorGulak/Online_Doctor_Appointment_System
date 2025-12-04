@@ -32,10 +32,10 @@ namespace Online_Doctor_Appointment_System.Views
             InitializeComponent();
 
             // Инициализация сервисов
-            var doctorRepo = new XmlDoctorRepository();
+            XmlDoctorRepository doctorRepo = new XmlDoctorRepository();
             _doctorService = new DoctorService(doctorRepo);
 
-            var specRepo = new SpecializationRepository();
+            SpecializationRepository specRepo = new SpecializationRepository();
             _specializationService = new SpecializationService(specRepo);
 
             // Загружаем данные
@@ -64,7 +64,7 @@ namespace Online_Doctor_Appointment_System.Views
         private void LoadDoctors()
         {
             // Прямо используем объекты Doctor в DataGrid
-            var doctors = _doctorService.GetAllDoctors();
+            List<Doctor> doctors = _doctorService.GetAllDoctors();
             PersonsDG.ItemsSource = doctors;
         }
 
@@ -136,7 +136,7 @@ namespace Online_Doctor_Appointment_System.Views
                 }
 
                 // Получаем выбранную специальность
-                var selectedSpec = (Specialization)SpecTitleCB.SelectedItem;
+                Specialization selectedSpec = (Specialization)SpecTitleCB.SelectedItem;
 
                 // Создаем врача
                 var doctor = new Doctor(
@@ -186,7 +186,7 @@ namespace Online_Doctor_Appointment_System.Views
                 }
 
                 // Получаем выбранную специальность
-                var selectedSpec = (Specialization)SpecTitleCB.SelectedItem;
+                Specialization selectedSpec = (Specialization)SpecTitleCB.SelectedItem;
 
                 // Обновляем данные врача
                 _selectedDoctor.Name = DocNameTB.Text;
@@ -255,7 +255,7 @@ namespace Online_Doctor_Appointment_System.Views
             try
             {
                 // Выполняем поиск через сервис
-                var searchResults = _doctorService.SearchDoctors(searchTerm);
+                List<Doctor> searchResults = _doctorService.SearchDoctors(searchTerm);
 
                 // Обновляем DataGrid результатами поиска
                 PersonsDG.ItemsSource = searchResults;

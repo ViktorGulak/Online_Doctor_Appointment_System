@@ -3,20 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace Online_Doctor_Appointment_System.Models
 {
-    class Disease
+    [Serializable]
+    [XmlRoot("Disease")]
+    public class Disease
     {
         private long diseaseId;
         private string title;
-        private string symptom; 
+        private string symptom;
 
+        // Конструктор для сериализации
+        public Disease() { }
         public Disease(long disId, string title, string symptom)
         {
             DiseaseId = disId;
-            Title = title;
-            Symptom = symptom;
+            DiseaseTitle = title;
+            DiseaseSymptom = symptom;
         }
 
         public long DiseaseId
@@ -29,13 +34,15 @@ namespace Online_Doctor_Appointment_System.Models
             }
         }
 
-        public string Title
+        [XmlElement("Title")]
+        public string DiseaseTitle
         {
             get => title;
             set => title = value;
         }
 
-        public string Symptom
+        [XmlElement("Symptom")]
+        public string DiseaseSymptom
         {
             get => symptom;
             set => symptom = value;

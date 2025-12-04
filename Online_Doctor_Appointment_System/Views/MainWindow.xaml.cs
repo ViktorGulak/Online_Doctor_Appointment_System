@@ -33,5 +33,11 @@ namespace Online_Doctor_Appointment_System
             DoctorWindow docWin = new DoctorWindow();
             docWin.Show();
         }
+
+        private void PatientBtn_Click(object sender, RoutedEventArgs e)
+        {
+            PatientWindow patWindow = new PatientWindow();
+            patWindow.Show();
+        }
     }
 }

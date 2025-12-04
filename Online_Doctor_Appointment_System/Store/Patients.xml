@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<ArrayOfPatient xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Patient>
+    <PersonId>1</PersonId>
+    <Name>Иван</Name>
+    <Surname>Сидоров</Surname>
+    <Patronymic>Петрович</Patronymic>
+    <Phone>89001234567</Phone>
+    <Email>ivan@example.com</Email>
+    <DateOfBirth>1985-05-15T00:00:00</DateOfBirth>
+    <DiseaseId>1</DiseaseId>
+    <Disease>
+      <DiseaseId>0</DiseaseId>
+      <Title>Головная боль</Title>
+      <Symptom>Пульсирующая боль в висках, тошнота</Symptom>
+    </Disease>
+  </Patient>
+  <Patient>
+    <PersonId>2</PersonId>
+    <Name>Мария</Name>
+    <Surname>Козлова</Surname>
+    <Patronymic>Александровна</Patronymic>
+    <Phone>89007654321</Phone>
+    <Email>maria@example.com</Email>
+    <DateOfBirth>1990-08-22T00:00:00</DateOfBirth>
+    <DiseaseId>2</DiseaseId>
+    <Disease>
+      <DiseaseId>0</DiseaseId>
+      <Title>Боль в спине</Title>
+      <Symptom>Острая боль в поясничном отделе, ограничение движений</Symptom>
+    </Disease>
+  </Patient>
+</ArrayOfPatient>

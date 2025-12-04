@@ -3,24 +3,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace Online_Doctor_Appointment_System.Models
 {
-    class Patient : Person
+    [Serializable]
+    [XmlRoot("Patient")]
+    public class Patient : Person
     {
         private string phone;
         private string email;
         private DateTime dateOfBirth;
         private long diseaseId;
+        private Disease disease;
 
-        public Patient(long personId, string name, string surname, string patronymic, string phone, 
-            string email, DateTime dateOfBirth, long diseaseId)
+        // Конструктор для сериализации (обязательно)
+        public Patient() : base() { }
+        public Patient(long personId, string name, string surname, string patronymic, string phone,
+            string email, DateTime dateOfBirth, long diseaseId, Disease disease)
             : base(personId, name, surname, patronymic)
         {
             Phone = phone;
             Email = email;
             DateOfBirth = dateOfBirth;
             DiseaseId = diseaseId;
+            PatientDisease = disease;
         }
 
         public string Phone
@@ -28,7 +35,7 @@ namespace Online_Doctor_Appointment_System.Models
             get => phone;
             set
             {
-                if(value.Length < 0 || value.Length > 11) throw new ArgumentException("Номер телефона должен состоять из 11 цифр");
+                if (value.Length < 0 || value.Length > 11) throw new ArgumentException("Номер телефона должен состоять из 11 цифр");
                 phone = value;
             }
         }
@@ -68,8 +75,21 @@ namespace Online_Doctor_Appointment_System.Models
             }
         }
 
-        // Дополнительное свойство для форматированного вывода (только для чтения)
+        [XmlElement("Disease")]
+        public Disease PatientDisease
+        {
+            get => disease;
+            set => disease = value;
+        }
+
+        [XmlIgnore]
         public string FormattedDateOfBirth => dateOfBirth.ToString("dd.MM.yyyy");
-        
+
+        [XmlIgnore]
+        public string FullName => $"{Surname} {Name} {Patronymic}";
+
+        [XmlIgnore]
+        public string DiseaseTitle => PatientDisease?.DiseaseTitle ?? "Не указана";
+
     }
 }
