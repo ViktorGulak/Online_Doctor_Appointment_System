@@ -1,0 +1,256 @@
+﻿<Window x:Class="Online_Doctor_Appointment_System.Views.AppointmentWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Online_Doctor_Appointment_System.Views"
+        mc:Ignorable="d"
+        Title="Записи к варачам" Height="770" Width="1100" WindowState="Maximized">
+    <Grid Background="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionBrushKey}}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <!-- Все пространство для правой и левой колонок -->
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="*"/>
+            <!-- DataGrid займет всё оставшееся пространство -->
+        </Grid.ColumnDefinitions>
+
+        <!-- Левая панель с ScrollViewer -->
+        <ScrollViewer Grid.Row="0" Grid.Column="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+            <StackPanel>
+                <!-- Первый GroupBox с данными -->
+                <GroupBox Header="Данные" Margin="5" FontSize="16" Foreground="#FF7B16B6" BorderBrush="#FF7B16B6">
+                    <StackPanel Margin="10">
+                        <StackPanel Margin="0,5">
+                            <Label Content="Врач" FontSize="16" Foreground="#FF7B16B6"/>
+                            <ComboBox Style="{StaticResource PrimaryCB}" Name="TypeOfReceptionCB">
+                                <ComboBoxItem>Приём в поликлинике</ComboBoxItem>
+                                <ComboBoxItem>Выезд врача на дом</ComboBoxItem>
+                                <ComboBoxItem>Онлайн консультация</ComboBoxItem>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Margin="0,5">
+                            <Label Content="Врач" FontSize="16" Foreground="#FF7B16B6"/>
+                            <ComboBox Style="{StaticResource PrimaryCB}" Name="ProfDocCB"
+                                TextSearch.TextPath="DoctorProfession"
+                                IsEditable="True"/>
+                        </StackPanel>
+                        <StackPanel Margin="0,5">
+                            <Label Content="Пациент" FontSize="16" Foreground="#FF7B16B6"/>
+                            <ComboBox Style="{StaticResource PrimaryCB}" Name="PatFullNameCB"
+                                TextSearch.TextPath="FullName"
+                                IsEditable="True"/>
+                        </StackPanel>
+                        <StackPanel Margin="0,5">
+                            <Label Content="Диагноз" FontSize="16" Foreground="#FF7B16B6"/>
+                            <TextBox Style="{StaticResource PrimaryTB}" Name="DiagnosisTB" 
+                                 TextWrapping="Wrap"
+                                 VerticalScrollBarVisibility="Auto"
+                                 AcceptsReturn="True"
+                                 IsReadOnly="True"
+                                 MinHeight="60"/>
+                        </StackPanel>
+                        <Grid Margin="0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="10"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" Margin="0,5">
+                                <Label Content="Статус" FontSize="16" Foreground="#FF7B16B6"/>
+                                <ComboBox Style="{StaticResource PrimaryCB}" Name="StatusCB">
+                                    <ComboBoxItem>Запланирован</ComboBoxItem>
+                                    <ComboBoxItem>Выполнен</ComboBoxItem>
+                                    <ComboBoxItem>Отменён</ComboBoxItem>
+                                    <ComboBoxItem>Не явка</ComboBoxItem>
+                                </ComboBox>
+                            </StackPanel>
+                            <StackPanel Grid.Column="2" Margin="0,5">
+                                <Label Content="Дата приёма" FontSize="16" Foreground="#FF7B16B6"/>
+                                <DatePicker Style="{StaticResource PrimaryDP}" Name="DateAdmissionDP"/>
+                            </StackPanel>
+                        </Grid>
+                        <Grid Margin="0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="10"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" Margin="0,5">
+                                <Label Content="Начало приёма" FontSize="16" Foreground="#FF7B16B6"/>
+                                <!-- TimePicker для времени начала -->
+                                <TextBox Style="{StaticResource PrimaryTB}" 
+                                     Name="StartTimeTB"
+                                     Text="00:00"
+                                     
+                                     MaxLength="5"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="2" Margin="0,5">
+                                <Label Content="Окончание приёма" FontSize="16" Foreground="#FF7B16B6"/>
+                                <!-- TimePicker для времени окончания -->
+                                <TextBox Style="{StaticResource PrimaryTB}" 
+                                     Name="EndTimeTB"
+                                     Text="00:00"
+                                     
+                                     MaxLength="5"/>
+                            </StackPanel>
+                        </Grid>
+                        <StackPanel Margin="0,5">
+                            <Label Content="Приписка" FontSize="16" Foreground="#FF7B16B6"/>
+                            <TextBox Style="{StaticResource PrimaryTB}" Name="PostscriptTB" 
+                                 TextWrapping="Wrap"
+                                 VerticalScrollBarVisibility="Auto"
+                                 AcceptsReturn="True"
+                                 MinHeight="60"/>
+                        </StackPanel>
+                    </StackPanel>
+                </GroupBox>
+
+                <!-- Второй GroupBox с адресом -->
+                <GroupBox Header="Доп. данные" Margin="5" FontSize="16" Foreground="#FF7B16B6" BorderBrush="#FF7B16B6">
+                    <StackPanel Margin="10">
+                        <Grid Margin="0,10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <StackPanel Grid.Row="0" Margin="0,5">
+                                <Label Content="Симптом" FontSize="16" Foreground="#FF7B16B6"/>
+                                <TextBox Style="{StaticResource PrimaryTB}" Name="SymptomTB" />
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </GroupBox>
+
+                <!-- Кнопки под GroupBox -->
+                <StackPanel Margin="5">
+                    <UniformGrid Columns="2" Margin="0,10">
+                        <Button Content="Добавить"
+                            Name="AddPatientBtn"
+                            Style="{StaticResource PrimaryBtn}"
+                            Margin="5"
+                            Padding="15,7" 
+                            FontSize="14"/>
+                        <Button Content="Изменить"
+                            Name="UpdatePatientBtn"
+                            Style="{StaticResource SuccessBtn}"
+                            Margin="5"
+                            Padding="15,7" 
+                            FontSize="14"/>
+                        <Button Content="Очистить"
+                            Name="ClearPatientBtn"
+                            Style="{StaticResource WarningBtn}"
+                            Margin="5"
+                            Padding="15,7" 
+                            FontSize="14"/>
+                        <Button Content="Удалить"
+                            Name="DeletePatientBtn"
+                            Style="{StaticResource DangerBtn}"
+                            Margin="5"
+                            Padding="15,7" 
+                            FontSize="14"/>
+                    </UniformGrid>
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- Правая колонка с поиском и DataGrid -->
+        <Grid Grid.Row="0" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Панель поиска -->
+            <Grid Grid.Row="0" Margin="10,5,10,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="Поиск" 
+                   FontSize="16" 
+                   Foreground="#FF7B16B6" 
+                   Grid.Column="0"
+                   VerticalAlignment="Center"/>
+                <TextBox Style="{StaticResource PrimaryTB}" 
+                     Name="PatSearchTB" 
+                     Grid.Column="2" 
+                     VerticalAlignment="Center"/>
+            </Grid>
+            <Grid Grid.Row="1" Margin="10,5,10,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="Статус" 
+                   FontSize="16" 
+                   Foreground="#FF7B16B6" 
+                   Grid.Column="0"
+                   VerticalAlignment="Center"/>
+                <ComboBox Style="{StaticResource PrimaryCB}"
+                     SelectedIndex="0"
+                     Name="StatusFilterhCB" 
+                     Grid.Column="2">
+                    <ComboBoxItem>Все</ComboBoxItem>
+                    <ComboBoxItem>Запланированные</ComboBoxItem>
+                    <ComboBoxItem>Выполненые</ComboBoxItem>
+                    <ComboBoxItem>Отменённые</ComboBoxItem>
+                    <ComboBoxItem>Не явки</ComboBoxItem>
+                </ComboBox>
+            </Grid>
+
+            <!-- DataGrid -->
+            <DataGrid Grid.Row="2"
+                  Margin="10,5,10,10" 
+                  Name="PaientsDG" 
+                  AutoGenerateColumns="False" 
+                  IsReadOnly="True"
+                  Style="{StaticResource PrimaryDataGrid}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ФИО" 
+                    Binding="{Binding FullName}" 
+                    Width="200"
+                    HeaderStyle="{StaticResource PrimaryDataGridColumnHeader}"
+                    ElementStyle="{StaticResource PrimaryDataGridCellText}"
+                    CellStyle="{StaticResource PrimaryDataGridCell}"/>
+                    <DataGridTextColumn Header="Дата рождения" 
+                    Binding="{Binding FormattedDateOfBirth}" 
+                    Width="100"
+                    HeaderStyle="{StaticResource PrimaryDataGridColumnHeader}"
+                    ElementStyle="{StaticResource PrimaryDataGridCellText}"
+                    CellStyle="{StaticResource PrimaryDataGridCell}"/>
+                    <DataGridTextColumn Header="Телефон" 
+                    Binding="{Binding Phone}" 
+                    Width="100"
+                    HeaderStyle="{StaticResource PrimaryDataGridColumnHeader}"
+                    ElementStyle="{StaticResource PrimaryDataGridCellText}"
+                    CellStyle="{StaticResource PrimaryDataGridCell}"/>
+                    <DataGridTextColumn Header="Эл. почта" 
+                    Binding="{Binding Email}" 
+                    Width="150"
+                    HeaderStyle="{StaticResource PrimaryDataGridColumnHeader}"
+                    ElementStyle="{StaticResource PrimaryDataGridCellText}"
+                    CellStyle="{StaticResource PrimaryDataGridCell}"/>
+                    <DataGridTextColumn Header="Симптом" 
+                    Binding="{Binding PatientDisease.DiseaseTitle}" 
+                    Width="120"
+                    HeaderStyle="{StaticResource PrimaryDataGridColumnHeader}"
+                    ElementStyle="{StaticResource PrimaryDataGridCellText}"
+                    CellStyle="{StaticResource PrimaryDataGridCell}"/>
+                    <DataGridTextColumn Header="Описание" 
+                    Binding="{Binding PatientDisease.DiseaseSymptom}" 
+                    Width="*"
+                    HeaderStyle="{StaticResource PrimaryDataGridColumnHeader}"
+                    ElementStyle="{StaticResource PrimaryDataGridCellText}"
+                    CellStyle="{StaticResource PrimaryDataGridCell}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Grid>
+</Window>

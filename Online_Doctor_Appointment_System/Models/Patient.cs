@@ -89,6 +89,9 @@ namespace Online_Doctor_Appointment_System.Models
         public string FullName => $"{Surname} {Name} {Patronymic}";
 
         [XmlIgnore]
+        public string Diagnosis => $"{PatientDisease.DiseaseTitle} \n{PatientDisease.DiseaseSymptom}";
+
+        [XmlIgnore]
         public string DiseaseTitle => PatientDisease?.DiseaseTitle ?? "Не указана";
 
     }

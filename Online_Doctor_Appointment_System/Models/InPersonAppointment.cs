@@ -3,69 +3,56 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace Online_Doctor_Appointment_System.Models
 {
-    class InPersonAppointment : Appointment // Очный приём в поликлинике
+    [Serializable]
+    [XmlRoot("InPersonAppointment")]
+    public class InPersonAppointment : Appointment
     {
-        private string city;
-        private string streetTitle;
-        private string houseNumber;
+        
         private string hospitalTitle;
         private string cabinetNumber;
 
-        public InPersonAppointment(long appointmentId, long patientId, long doctorId, DateTime dateTime, int duration, 
-            AppointmentStatus status, string city, string streetTitle, string houseNumber, string hospitalTitle, string cabinetNumber)
-            : base(appointmentId, patientId, doctorId, dateTime, duration, status)
-        {
+        public InPersonAppointment() : base() { }
 
-            City = city;
-            StreetTitle = streetTitle;
-            HouseNumber = houseNumber;
+        public InPersonAppointment(long appointmentId, long patientId, Patient patient, long doctorId, Doctor doctor,
+            DateTime appointmentDateTime, TimeSpan startTime, TimeSpan endTime, string postscript,
+            AppointmentStatus status, string hospitalTitle, string cabinetNumber)
+            : base(appointmentId, patientId, patient, doctorId, doctor, appointmentDateTime, startTime, endTime,
+                   postscript, status)
+        {
             HospitalTitle = hospitalTitle;
             CabinetNumber = cabinetNumber;
         }
 
-        public string City
-        {
-            get => city;
-            set => city = value;
-        }
-
-        public string StreetTitle
-        {
-            get => streetTitle;
-            set => streetTitle = value;
-        }
-
-
-        public string HouseNumber
-        {
-            get => houseNumber;
-            set => houseNumber = value;
-        }
-
+        [XmlElement("HospitalTitle")]
         public string HospitalTitle
         {
             get => hospitalTitle;
             set => hospitalTitle = value;
         }
 
+        [XmlElement("CabinetNumber")]
         public string CabinetNumber
         {
             get => cabinetNumber;
             set => cabinetNumber = value;
         }
 
-        public string ReceptionLocation => $"г. {City}, ул. {StreetTitle}, д. {HouseNumber}, {HospitalTitle}, кабинет № {CabinetNumber}";
+        [XmlIgnore]
+        public string ReceptionLocation => $"Больница {HospitalTitle}, каб. {CabinetNumber}";
+
         public override string GetDetails()
         {
-            return "Очный приём. Место проведения " + ReceptionLocation;
+            return $"Очный приём. Место: {ReceptionLocation}";
         }
 
         public override string GetInfo()
-        { 
-            return $"{base.GetInfo()} Тип приёма: {GetDetails()}";
+        {
+            return $"{base.GetInfo()}. Тип: {GetDetails()}";
         }
     }
+
 }

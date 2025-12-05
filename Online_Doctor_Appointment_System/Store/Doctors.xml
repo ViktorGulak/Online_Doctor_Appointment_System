@@ -70,4 +70,74 @@
     <LicenseNumber>901234</LicenseNumber>
     <Experience>5</Experience>
   </Doctor>
+  <Doctor>
+    <PersonId>6</PersonId>
+    <Name>Анна</Name>
+    <Surname>Сазонова</Surname>
+    <Patronymic>Геннадьевна</Patronymic>
+    <SpecializationId>6</SpecializationId>
+    <Specialization>
+      <SpecializationId>6</SpecializationId>
+      <SpecializationTitle>Гастроэнтеролог</SpecializationTitle>
+      <SpecializationDescription>Специалист по заболеваниям желудочно-кишечного тракта</SpecializationDescription>
+    </Specialization>
+    <LicenseNumber>234567</LicenseNumber>
+    <Experience>10</Experience>
+  </Doctor>
+  <Doctor>
+    <PersonId>7</PersonId>
+    <Name>Игорь</Name>
+    <Surname>Гнатов</Surname>
+    <Patronymic>Романович</Patronymic>
+    <SpecializationId>7</SpecializationId>
+    <Specialization>
+      <SpecializationId>7</SpecializationId>
+      <SpecializationTitle>Ортопед</SpecializationTitle>
+      <SpecializationDescription>Специалист по заболеваниям опорно-двигательного аппарата</SpecializationDescription>
+    </Specialization>
+    <LicenseNumber>567890</LicenseNumber>
+    <Experience>18</Experience>
+  </Doctor>
+  <Doctor>
+    <PersonId>8</PersonId>
+    <Name>Виктория</Name>
+    <Surname>Столярова</Surname>
+    <Patronymic>Аркадьевна</Patronymic>
+    <SpecializationId>8</SpecializationId>
+    <Specialization>
+      <SpecializationId>8</SpecializationId>
+      <SpecializationTitle>Пульмонолог</SpecializationTitle>
+      <SpecializationDescription>Специалист по заболеваниям дыхательной системы</SpecializationDescription>
+    </Specialization>
+    <LicenseNumber>112233</LicenseNumber>
+    <Experience>9</Experience>
+  </Doctor>
+  <Doctor>
+    <PersonId>9</PersonId>
+    <Name>Кирилл</Name>
+    <Surname>Лучиков</Surname>
+    <Patronymic>Денисович</Patronymic>
+    <SpecializationId>9</SpecializationId>
+    <Specialization>
+      <SpecializationId>9</SpecializationId>
+      <SpecializationTitle>Аллерголог</SpecializationTitle>
+      <SpecializationDescription>Специалист по аллергическим заболеваниям и иммунным нарушениям</SpecializationDescription>
+    </Specialization>
+    <LicenseNumber>445566</LicenseNumber>
+    <Experience>7</Experience>
+  </Doctor>
+  <Doctor>
+    <PersonId>10</PersonId>
+    <Name>Наталья</Name>
+    <Surname>Головина</Surname>
+    <Patronymic>Олеговна</Patronymic>
+    <SpecializationId>4</SpecializationId>
+    <Specialization>
+      <SpecializationId>4</SpecializationId>
+      <SpecializationTitle>Невролог</SpecializationTitle>
+      <SpecializationDescription>Специалист по заболеваниям нервной системы</SpecializationDescription>
+    </Specialization>
+    <LicenseNumber>778899</LicenseNumber>
+    <Experience>14</Experience>
+  </Doctor>
 </ArrayOfDoctor>

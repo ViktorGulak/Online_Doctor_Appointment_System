@@ -26,8 +26,6 @@
         <!-- Первый GroupBox с данными -->
         <GroupBox Grid.Row="0" Grid.Column="0" Header="Данные пациента" Margin="5" FontSize="16" Foreground="#FF7B16B6" BorderBrush="#FF7B16B6">
             <StackPanel Margin="10">
-                <!-- 4 TextBox в 2 колонки -->
-                <!-- Левый столбец -->
                 <Grid Margin="0,10">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -35,9 +33,9 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
                     </Grid.RowDefinitions>
                     <StackPanel Margin="0,5" Grid.Column="0" Grid.Row="0">
                         <Label Content="Фамилия" FontSize="16" Foreground="#FF7B16B6"/>
@@ -84,10 +82,11 @@
 
                     <StackPanel Grid.Row="1" Margin="0,5">
                         <Label Content="Описание" FontSize="16" Foreground="#FF7B16B6"/>
-                        <TextBox Style="{StaticResource PrimaryTB}" Name="SymptomDescriptionTB" UndoLimit="150" 
-                                 TextWrapping="Wrap"
-                                 VerticalScrollBarVisibility="Auto"
-                        />
+                        <TextBox Style="{StaticResource PrimaryTB}" Name="SymptomDescriptionTB" 
+                             TextWrapping="Wrap"
+                             VerticalScrollBarVisibility="Auto"
+                             AcceptsReturn="True"
+                             MinHeight="60"/>
                     </StackPanel>
                 </Grid>
             </StackPanel>
@@ -97,86 +96,105 @@
         <StackPanel Grid.Row="2" Grid.Column="0" Margin="5">
             <UniformGrid Columns="2" Margin="0,10">
                 <Button Content="Добавить"
-                    Name="AddPatientBtn"
-                    Style="{StaticResource PrimaryBtn}"
-                    Margin="5"
-                    Padding="15,7" 
-                    FontSize="14" Click="AddPatientBtn_Click"/>
+                Name="AddPatientBtn"
+                Style="{StaticResource PrimaryBtn}"
+                Margin="5"
+                Padding="15,7" 
+                FontSize="14" Click="AddPatientBtn_Click"/>
                 <Button Content="Изменить"
-                    Name="UpdatePatientBtn"
-                    Style="{StaticResource SuccessBtn}"
-                    Margin="5"
-                    Padding="15,7" 
-                    FontSize="14" Click="UpdatePatientBtn_Click"/>
+                Name="UpdatePatientBtn"
+                Style="{StaticResource SuccessBtn}"
+                Margin="5"
+                Padding="15,7" 
+                FontSize="14" Click="UpdatePatientBtn_Click"/>
                 <Button Content="Очистить"
-                    Name="ClearPatientBtn"
-                    Style="{StaticResource WarningBtn}"
-                    Margin="5"
-                    Padding="15,7" 
-                    FontSize="14" Click="ClearPatientBtn_Click"/>
+                Name="ClearPatientBtn"
+                Style="{StaticResource WarningBtn}"
+                Margin="5"
+                Padding="15,7" 
+                FontSize="14" Click="ClearPatientBtn_Click"/>
                 <Button Content="Удалить"
-                    Name="DeletePatientBtn"
-                    Style="{StaticResource DangerBtn}"
-                    Margin="5"
-                    Padding="15,7" 
-                    FontSize="14" Click="DeletePatientBtn_Click"/>
+                Name="DeletePatientBtn"
+                Style="{StaticResource DangerBtn}"
+                Margin="5"
+                Padding="15,7" 
+                FontSize="14" Click="DeletePatientBtn_Click"/>
             </UniformGrid>
         </StackPanel>
-        <StackPanel Grid.Column="1" Margin="10">
-            <Grid>
+
+        <!-- Правая колонка с поиском и DataGrid -->
+        <Grid Grid.Row="0" Grid.Column="1" Grid.RowSpan="4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Панель поиска -->
+            <Grid Grid.Row="0" Margin="10,5,10,0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="10"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Label Content="Поиск" FontSize="20" Foreground="#FF7B16B6" Grid.Column="0"/>
-                <TextBox Style="{StaticResource PrimaryTB}" Name="PatSearchTB" Grid.Column="2" Margin="0, 0, 10, 0" TextChanged="PatSearchTB_TextChanged"/>
+                <Label Content="Поиск" 
+                   FontSize="16" 
+                   Foreground="#FF7B16B6" 
+                   Grid.Column="0"
+                   VerticalAlignment="Center"/>
+                <TextBox Style="{StaticResource PrimaryTB}" 
+                     Name="PatSearchTB" 
+                     Grid.Column="2" 
+                     VerticalAlignment="Center"
+                     TextChanged="PatSearchTB_TextChanged"/>
             </Grid>
-            <DataGrid Grid.Column="1" Grid.RowSpan="4"
-              Margin="5" 
-              Name="PaientsDG" 
-              AutoGenerateColumns="False" 
-              IsReadOnly="True"
-              Style="{StaticResource PrimaryDataGrid}" SelectionChanged="PaientsDG_SelectionChanged">
+
+            <!-- DataGrid -->
+            <DataGrid Grid.Row="1"
+                  Margin="10,5,10,10" 
+                  Name="PaientsDG" 
+                  AutoGenerateColumns="False" 
+                  IsReadOnly="True"
+                  Style="{StaticResource PrimaryDataGrid}" 
+                  SelectionChanged="PaientsDG_SelectionChanged">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="ФИО" 
-                        Binding="{Binding FullName}" 
-                        Width="200"
-                        HeaderStyle="{StaticResource PrimaryDataGridColumnHeader}"
-                        ElementStyle="{StaticResource PrimaryDataGridCellText}"
-                        CellStyle="{StaticResource PrimaryDataGridCell}"/>
+                    Binding="{Binding FullName}" 
+                    Width="200"
+                    HeaderStyle="{StaticResource PrimaryDataGridColumnHeader}"
+                    ElementStyle="{StaticResource PrimaryDataGridCellText}"
+                    CellStyle="{StaticResource PrimaryDataGridCell}"/>
                     <DataGridTextColumn Header="Дата рождения" 
-                        Binding="{Binding FormattedDateOfBirth}" 
-                        Width="100"
-                        HeaderStyle="{StaticResource PrimaryDataGridColumnHeader}"
-                        ElementStyle="{StaticResource PrimaryDataGridCellText}"
-                        CellStyle="{StaticResource PrimaryDataGridCell}"/>
+                    Binding="{Binding FormattedDateOfBirth}" 
+                    Width="100"
+                    HeaderStyle="{StaticResource PrimaryDataGridColumnHeader}"
+                    ElementStyle="{StaticResource PrimaryDataGridCellText}"
+                    CellStyle="{StaticResource PrimaryDataGridCell}"/>
                     <DataGridTextColumn Header="Телефон" 
-                        Binding="{Binding Phone}" 
-                        Width="70"
-                        HeaderStyle="{StaticResource PrimaryDataGridColumnHeader}"
-                        ElementStyle="{StaticResource PrimaryDataGridCellText}"
-                        CellStyle="{StaticResource PrimaryDataGridCell}"/>
+                    Binding="{Binding Phone}" 
+                    Width="100"
+                    HeaderStyle="{StaticResource PrimaryDataGridColumnHeader}"
+                    ElementStyle="{StaticResource PrimaryDataGridCellText}"
+                    CellStyle="{StaticResource PrimaryDataGridCell}"/>
                     <DataGridTextColumn Header="Эл. почта" 
-                        Binding="{Binding Email}" 
-                        Width="100"
-                        HeaderStyle="{StaticResource PrimaryDataGridColumnHeader}"
-                        ElementStyle="{StaticResource PrimaryDataGridCellText}"
-                        CellStyle="{StaticResource PrimaryDataGridCell}"/>
+                    Binding="{Binding Email}" 
+                    Width="150"
+                    HeaderStyle="{StaticResource PrimaryDataGridColumnHeader}"
+                    ElementStyle="{StaticResource PrimaryDataGridCellText}"
+                    CellStyle="{StaticResource PrimaryDataGridCell}"/>
                     <DataGridTextColumn Header="Симптом" 
-                        Binding="{Binding PatientDisease.DiseaseTitle}" 
-                        Width="100"
-                        HeaderStyle="{StaticResource PrimaryDataGridColumnHeader}"
-                        ElementStyle="{StaticResource PrimaryDataGridCellText}"
-                        CellStyle="{StaticResource PrimaryDataGridCell}"/>
+                    Binding="{Binding PatientDisease.DiseaseTitle}" 
+                    Width="120"
+                    HeaderStyle="{StaticResource PrimaryDataGridColumnHeader}"
+                    ElementStyle="{StaticResource PrimaryDataGridCellText}"
+                    CellStyle="{StaticResource PrimaryDataGridCell}"/>
                     <DataGridTextColumn Header="Описание" 
-                        Binding="{Binding PatientDisease.DiseaseSymptom}" 
-                        Width="*"
-                        HeaderStyle="{StaticResource PrimaryDataGridColumnHeader}"
-                        ElementStyle="{StaticResource PrimaryDataGridCellText}"
-                        CellStyle="{StaticResource PrimaryDataGridCell}"/>
+                    Binding="{Binding PatientDisease.DiseaseSymptom}" 
+                    Width="*"
+                    HeaderStyle="{StaticResource PrimaryDataGridColumnHeader}"
+                    ElementStyle="{StaticResource PrimaryDataGridCellText}"
+                    CellStyle="{StaticResource PrimaryDataGridCell}"/>
                 </DataGrid.Columns>
             </DataGrid>
-        </StackPanel>
+        </Grid>
     </Grid>
 </Window>

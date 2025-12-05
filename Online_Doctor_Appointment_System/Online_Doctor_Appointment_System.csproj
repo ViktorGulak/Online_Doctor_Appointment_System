@@ -73,9 +73,16 @@
     <Compile Include="Types\AppointmentStatus.cs" />
     <Compile Include="Models\Appointment.cs" />
     <Compile Include="Types\IMedicalAppointment.cs" />
+    <Compile Include="Views\AppointmentWindow.xaml.cs">
+      <DependentUpon>AppointmentWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PatientWindow.xaml.cs">
       <DependentUpon>PatientWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\AppointmentWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\DoctorWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

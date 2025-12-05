@@ -73,6 +73,9 @@ namespace Online_Doctor_Appointment_System.Models
         public string FullName => $"{Surname} {Name} {Patronymic}";
 
         [XmlIgnore]
+        public string DoctorProfession => $"{SpecializationTitle} {Surname} {Name[0]}.{Patronymic[0]}.";
+
+        [XmlIgnore]
         public string SpecializationTitle => DoctorSpecialization?.SpecializationTitle ?? "Не указана";
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Online_Doctor_Appointment_System
 {
-    enum AppointmentStatus
+    public enum AppointmentStatus
     {
         SCHEDULED, // Запланирован
         COMPLETED, // Выполнен

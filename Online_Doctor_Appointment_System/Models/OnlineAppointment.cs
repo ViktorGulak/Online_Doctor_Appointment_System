@@ -3,48 +3,54 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace Online_Doctor_Appointment_System.Models
 {
-    class OnlineAppointment : Appointment // Онлайн консультация у врача
+    [Serializable]
+    [XmlRoot("OnlineAppointment")]
+    public class OnlineAppointment : Appointment
     {
         private string link;
-        private string meetingService;
         private string chatCode;
 
-        public OnlineAppointment(long appointmentId, long patientId, long doctorId,
-            DateTime dateTime, int duration, AppointmentStatus status, string link, string meetingService, string chatCode)
-            : base(appointmentId, patientId, doctorId, dateTime, duration, status)
+        public OnlineAppointment() : base() { }
+
+        public OnlineAppointment(long appointmentId, long patientId, Patient patient, long doctorId, Doctor doctor,
+            DateTime appointmentDateTime, TimeSpan startTime, TimeSpan endTime, string postscript,
+            AppointmentStatus status, string link, string chatCode)
+            : base(appointmentId, patientId, patient, doctorId, doctor, appointmentDateTime, startTime, endTime,
+                   postscript, status)
         {
             Link = link;
-            MeetingService = meetingService;
             ChatCode = chatCode;
         }
 
+        [XmlElement("Link")]
         public string Link
         {
             get => link;
             set => link = value;
         }
-        public string MeetingService
-        {
-            get => meetingService;
-            set => meetingService = value;
-        }
+
+        [XmlElement("ChatCode")]
         public string ChatCode
         {
             get => chatCode;
             set => chatCode = value;
         }
 
+        [XmlIgnore]
+        public string VideoConferenceInfo => $"Ссылка: {Link}, Код чата: {ChatCode}";
+
         public override string GetDetails()
         {
-            return "Онлайн-приём. Ссылка на видеосвязь: " + Link;
+            return $"Онлайн-приём. {VideoConferenceInfo}";
         }
 
         public override string GetInfo()
         {
-            return $"{base.GetInfo()} Тип приёма: {GetDetails()}";
+            return $"{base.GetInfo()}. Тип: {GetDetails()}";
         }
     }
 }
