@@ -23,7 +23,7 @@
         </Button>
         <Button Margin="20" Grid.Row="2" Content="Записи к врачу"  
                 FontSize="20" Name="MedicalAppointmentsBtn"
-                Style="{StaticResource PrimaryBtn}">
+                Style="{StaticResource PrimaryBtn}" Click="MedicalAppointmentsBtn_Click">
         </Button>
         <Button Margin="20" Grid.Row="3" Content="Статистика"  
                 FontSize="20" Name="Statistic"

@@ -63,7 +63,7 @@ namespace Online_Doctor_Appointment_System.Models
         public string PatientAddress => $"г. {City}, ул. {StreetTitle}, д. {HouseNumber}, кв. {AppartmentNumber}";
 
         [XmlIgnore]
-        public string AddressForMap => $"{City}, {StreetTitle}, {HouseNumber}";
+        public override string AdditionalInfo => PatientAddress;
 
         public override string GetDetails()
         {

@@ -44,6 +44,9 @@ namespace Online_Doctor_Appointment_System.Models
         [XmlIgnore]
         public string ReceptionLocation => $"Больница {HospitalTitle}, каб. {CabinetNumber}";
 
+        [XmlIgnore]
+        public override string AdditionalInfo => ReceptionLocation;
+
         public override string GetDetails()
         {
             return $"Очный приём. Место: {ReceptionLocation}";

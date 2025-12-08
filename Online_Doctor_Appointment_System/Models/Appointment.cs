@@ -17,10 +17,10 @@ namespace Online_Doctor_Appointment_System.Models
     {
         private long appointmentId;
         private long patientId;
-        private Patient patient;
+        private Patient patient; // Только для кода, не для XML
         private long doctorId;
-        private Doctor doctor;
-        private DateTime appointmentDateTime; // Объединенная дата и время
+        private Doctor doctor;   // Только для кода, не для XML
+        private DateTime appointmentDate;
         private TimeSpan startTime;
         private TimeSpan endTime;
         private string postscript;
@@ -29,7 +29,7 @@ namespace Online_Doctor_Appointment_System.Models
         public Appointment() { }
 
         public Appointment(long appointmentId, long patientId, Patient pat, long doctorId, Doctor doc,
-                           DateTime appointmentDateTime, TimeSpan startTime, TimeSpan endTime,
+                           DateTime appointmentDate, TimeSpan startTime, TimeSpan endTime,
                            string postscript, AppointmentStatus status)
         {
             AppointmentId = appointmentId;
@@ -37,34 +37,28 @@ namespace Online_Doctor_Appointment_System.Models
             RecordedPatient = pat;
             DoctorId = doctorId;
             ActingDoctor = doc;
-            AppointmentDateTime = appointmentDateTime;
+            AppointmentDate = appointmentDate;
             StartTime = startTime;
             EndTime = endTime;
             Postscript = postscript;
             Status = status;
         }
 
+        [XmlElement("AppointmentId")]
         public long AppointmentId
         {
             get => appointmentId;
-            set
-            {
-                if (value < 0) throw new ArgumentException("Идентификатор записи не может быть меньше 0.");
-                appointmentId = value;
-            }
+            set => appointmentId = value;
         }
 
+        [XmlElement("PatientId")]
         public long PatientId
         {
             get => patientId;
-            set
-            {
-                if (value < 0) throw new ArgumentException("Идентификатор пациента не может быть меньше 0.");
-                patientId = value;
-            }
+            set => patientId = value;
         }
 
-        [XmlElement("Patient")]
+        [XmlIgnore] // УБРАТЬ XmlElement! Patient хранится отдельно
         public Patient RecordedPatient
         {
             get => patient;
@@ -76,17 +70,14 @@ namespace Online_Doctor_Appointment_System.Models
             }
         }
 
+        [XmlElement("DoctorId")]
         public long DoctorId
         {
             get => doctorId;
-            set
-            {
-                if (value < 0) throw new ArgumentException("Идентификатор врача не может быть меньше 0.");
-                doctorId = value;
-            }
+            set => doctorId = value;
         }
 
-        [XmlElement("Doctor")]
+        [XmlIgnore] // УБРАТЬ XmlElement! Doctor хранится отдельно
         public Doctor ActingDoctor
         {
             get => doctor;
@@ -98,69 +89,28 @@ namespace Online_Doctor_Appointment_System.Models
             }
         }
 
-        [XmlElement("AppointmentDateTime")]
-        public DateTime AppointmentDateTime
+        [XmlElement("AppointmentDate")]
+        public DateTime AppointmentDate
         {
-            get => appointmentDateTime;
-            set
-            {
-                DateTime currentDate = DateTime.Now;
-                DateTime minDate = currentDate.AddYears(-1); // Можно смотреть записи за прошлый год
-                DateTime maxDate = currentDate.AddMonths(3); // Записи на 3 месяца вперед
-
-                if (value < minDate)
-                    throw new ArgumentException($"Дата записи не может быть раньше {minDate:dd.MM.yyyy}");
-
-                if (value > maxDate)
-                    throw new ArgumentException($"Дата записи не может быть позже {maxDate:dd.MM.yyyy}");
-
-                appointmentDateTime = value.Date; // Сохраняем только дату
-            }
+            get => appointmentDate;
+            set => appointmentDate = value;
         }
 
         [XmlElement("StartTime")]
         public TimeSpan StartTime
         {
             get => startTime;
-            set
-            {
-                // Проверка что время в пределах дня (0-23:59)
-                if (value < TimeSpan.Zero || value >= TimeSpan.FromHours(24))
-                    throw new ArgumentException("Время начала должно быть между 00:00 и 23:59");
-
-                // Проверка что время начала раньше времени окончания
-                if (value >= EndTime)
-                    throw new ArgumentException("Время начала должно быть раньше времени окончания");
-
-                startTime = value;
-            }
+            set => startTime = value;
         }
 
         [XmlElement("EndTime")]
         public TimeSpan EndTime
         {
             get => endTime;
-            set
-            {
-                // Проверка что время в пределах дня
-                if (value < TimeSpan.Zero || value >= TimeSpan.FromHours(24))
-                    throw new ArgumentException("Время окончания должно быть между 00:00 и 23:59");
-
-                // Проверка что время окончания позже времени начала
-                if (value <= StartTime)
-                    throw new ArgumentException("Время окончания должно быть позже времени начала");
-
-                // Проверка что прием не длится больше 4 часов (можно изменить)
-                if ((value - StartTime) > TimeSpan.FromHours(4))
-                    throw new ArgumentException("Продолжительность приема не может превышать 4 часа");
-
-                endTime = value;
-            }
+            set => endTime = value;
         }
 
-        [XmlIgnore]
-        public TimeSpan Duration => EndTime - StartTime;
-
+        [XmlElement("Postscript")]
         public string Postscript
         {
             get => postscript;
@@ -174,9 +124,8 @@ namespace Online_Doctor_Appointment_System.Models
             set => status = value;
         }
 
-        // Форматированные свойства для отображения
         [XmlIgnore]
-        public string FormattedDate => AppointmentDateTime.ToString("dd.MM.yyyy");
+        public string FormattedDate => AppointmentDate.ToString("dd.MM.yyyy");
 
         [XmlIgnore]
         public string FormattedStartTime => StartTime.ToString(@"hh\:mm");
@@ -190,36 +139,28 @@ namespace Online_Doctor_Appointment_System.Models
         [XmlIgnore]
         public string FormattedDateTime => $"{FormattedDate} {FormattedTimeRange}";
 
-        // Для удобства - полная дата+время начала
         [XmlIgnore]
-        public DateTime FullStartDateTime => AppointmentDateTime.Add(StartTime);
+        public abstract string AdditionalInfo { get; }
 
-        [XmlIgnore]
-        public DateTime FullEndDateTime => AppointmentDateTime.Add(EndTime);
-
-        // Абстрактный метод из интерфейса
         public abstract string GetDetails();
 
-        // Метод для получения полной информации
         public virtual string GetInfo()
         {
-            return $"ID: {appointmentId}, " +
+            return $"ID: {AppointmentId}, " +
                    $"Пациент: {RecordedPatient?.FullName ?? PatientId.ToString()}, " +
                    $"Врач: {ActingDoctor?.FullName ?? DoctorId.ToString()}, " +
                    $"Дата/время: {FormattedDateTime}, " +
                    $"Статус: {Status}";
         }
 
-        // Метод для проверки пересечения времени с другой записью
         public bool TimeOverlapsWith(Appointment other)
         {
-            if (this.AppointmentDateTime.Date != other.AppointmentDateTime.Date)
+            if (this.AppointmentDate.Date != other.AppointmentDate.Date)
                 return false;
 
             return (this.StartTime < other.EndTime && this.EndTime > other.StartTime);
         }
 
-        // Метод для проверки доступности врача в это время
         public bool IsDoctorAvailable(List<Appointment> existingAppointments)
         {
             var doctorAppointments = existingAppointments

@@ -65,8 +65,10 @@
     <Compile Include="Models\Specialization.cs" />
     <Compile Include="Models\TimeSlot.cs" />
     <Compile Include="Repositories\SpecializationRepository.cs" />
+    <Compile Include="Repositories\XmlAppointmentRepository.cs" />
     <Compile Include="Repositories\XmlDoctorRepositoty.cs" />
     <Compile Include="Repositories\XmlPatientRepository.cs" />
+    <Compile Include="Services\AppointmentService.cs" />
     <Compile Include="Services\DoctorService.cs" />
     <Compile Include="Services\PatientService.cs" />
     <Compile Include="Services\SpecializationService.cs" />
@@ -155,6 +157,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Store\Patients.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Store\Appointments.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

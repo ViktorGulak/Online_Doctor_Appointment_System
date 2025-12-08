@@ -43,6 +43,9 @@ namespace Online_Doctor_Appointment_System.Models
         [XmlIgnore]
         public string VideoConferenceInfo => $"Ссылка: {Link}, Код чата: {ChatCode}";
 
+        [XmlIgnore]
+        public override string AdditionalInfo => VideoConferenceInfo;
+
         public override string GetDetails()
         {
             return $"Онлайн-приём. {VideoConferenceInfo}";

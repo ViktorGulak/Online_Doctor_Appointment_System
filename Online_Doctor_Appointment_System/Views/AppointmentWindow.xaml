@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Online_Doctor_Appointment_System.Views"
         mc:Ignorable="d"
-        Title="Записи к варачам" Height="770" Width="1100" WindowState="Maximized">
+        Title="Записи к варачам" Height="949.2" Width="1100" WindowState="Maximized">
     <Grid Background="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionBrushKey}}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -24,8 +24,8 @@
                 <GroupBox Header="Данные" Margin="5" FontSize="16" Foreground="#FF7B16B6" BorderBrush="#FF7B16B6">
                     <StackPanel Margin="10">
                         <StackPanel Margin="0,5">
-                            <Label Content="Врач" FontSize="16" Foreground="#FF7B16B6"/>
-                            <ComboBox Style="{StaticResource PrimaryCB}" Name="TypeOfReceptionCB">
+                            <Label Content="Тип приёма" FontSize="16" Foreground="#FF7B16B6"/>
+                            <ComboBox Style="{StaticResource PrimaryCB}" Name="TypeOfReceptionCB" SelectionChanged="TypeOfReceptionCB_SelectionChanged">
                                 <ComboBoxItem>Приём в поликлинике</ComboBoxItem>
                                 <ComboBoxItem>Выезд врача на дом</ComboBoxItem>
                                 <ComboBoxItem>Онлайн консультация</ComboBoxItem>
@@ -40,7 +40,7 @@
                         <StackPanel Margin="0,5">
                             <Label Content="Пациент" FontSize="16" Foreground="#FF7B16B6"/>
                             <ComboBox Style="{StaticResource PrimaryCB}" Name="PatFullNameCB"
-                                TextSearch.TextPath="FullName"
+                                TextSearch.TextPath="ShortName"
                                 IsEditable="True"/>
                         </StackPanel>
                         <StackPanel Margin="0,5">
@@ -83,8 +83,7 @@
                                 <!-- TimePicker для времени начала -->
                                 <TextBox Style="{StaticResource PrimaryTB}" 
                                      Name="StartTimeTB"
-                                     Text="00:00"
-                                     
+                                     Text="00:00"  
                                      MaxLength="5"/>
                             </StackPanel>
                             <StackPanel Grid.Column="2" Margin="0,5">
@@ -93,7 +92,6 @@
                                 <TextBox Style="{StaticResource PrimaryTB}" 
                                      Name="EndTimeTB"
                                      Text="00:00"
-                                     
                                      MaxLength="5"/>
                             </StackPanel>
                         </Grid>
@@ -109,19 +107,71 @@
                 </GroupBox>
 
                 <!-- Второй GroupBox с адресом -->
-                <GroupBox Header="Доп. данные" Margin="5" FontSize="16" Foreground="#FF7B16B6" BorderBrush="#FF7B16B6">
+                <GroupBox Header="Адрес пациента" Name="PatAddressGB" Visibility="Collapsed" Margin="5" FontSize="16" Foreground="#FF7B16B6" BorderBrush="#FF7B16B6">
                     <StackPanel Margin="10">
                         <Grid Margin="0,10">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-
-                            <StackPanel Grid.Row="0" Margin="0,5">
-                                <Label Content="Симптом" FontSize="16" Foreground="#FF7B16B6"/>
-                                <TextBox Style="{StaticResource PrimaryTB}" Name="SymptomTB" />
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="10"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" Margin="0,5">
+                                <Label Content="Город" FontSize="16" Foreground="#FF7B16B6"/>
+                                <!-- TimePicker для времени начала -->
+                                <TextBox Style="{StaticResource PrimaryTB}" 
+                                     Name="PatientCityTB"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="2" Margin="0,5">
+                                <Label Content="Улица" FontSize="16" Foreground="#FF7B16B6"/>
+                                <TextBox Style="{StaticResource PrimaryTB}" 
+                                     Name="PatientStreetTB"/>
                             </StackPanel>
                         </Grid>
+                        <Grid Margin="0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="10"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" Margin="0,5">
+                                <Label Content="Номер дома" FontSize="16" Foreground="#FF7B16B6"/>
+                                <TextBox Style="{StaticResource PrimaryTB}" 
+                                     Name="HouseNumberTB"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="2" Margin="0,5">
+                                <Label Content="Номер картиры" FontSize="16" Foreground="#FF7B16B6"/>
+                                <TextBox Style="{StaticResource PrimaryTB}" 
+                                     Name="AppartmentNumberTB"/>
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Онлайн встреча" Name="OnlineDataGB" Visibility="Collapsed" Margin="5" FontSize="16" Foreground="#FF7B16B6" BorderBrush="#FF7B16B6">
+                    <StackPanel Margin="10">
+                        <StackPanel Grid.Column="0" Margin="0,5">
+                                <Label Content="Ссылка" FontSize="16" Foreground="#FF7B16B6"/>
+                                <TextBox Style="{StaticResource PrimaryTB}" 
+                                     Name="LinkTB"/>
+                            </StackPanel>
+                        <StackPanel Grid.Column="2" Margin="0,5">
+                            <Label Content="Код для подключения" FontSize="16" Foreground="#FF7B16B6"/>
+                            <TextBox Style="{StaticResource PrimaryTB}" 
+                                     Name="ConnectionCodeTB"/>
+                        </StackPanel>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Приём в поликлинике" Name="InPersonGB" Margin="5" FontSize="16" Foreground="#FF7B16B6" BorderBrush="#FF7B16B6">
+                    <StackPanel Margin="10">
+                        <StackPanel Grid.Column="0" Margin="0,5">
+                            <Label Content="Название больницы" FontSize="16" Foreground="#FF7B16B6"/>
+                            <TextBox Style="{StaticResource PrimaryTB}" 
+                                     Name="HospitalTB"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="2" Margin="0,5">
+                            <Label Content="Номер кабинета" FontSize="16" Foreground="#FF7B16B6"/>
+                            <TextBox Style="{StaticResource PrimaryTB}" 
+                                     Name="CabinetTB"/>
+                        </StackPanel>
                     </StackPanel>
                 </GroupBox>
 
@@ -129,25 +179,25 @@
                 <StackPanel Margin="5">
                     <UniformGrid Columns="2" Margin="0,10">
                         <Button Content="Добавить"
-                            Name="AddPatientBtn"
+                            Name="AddRecordBtn"
                             Style="{StaticResource PrimaryBtn}"
                             Margin="5"
                             Padding="15,7" 
                             FontSize="14"/>
                         <Button Content="Изменить"
-                            Name="UpdatePatientBtn"
+                            Name="UpdateRecordBtn"
                             Style="{StaticResource SuccessBtn}"
                             Margin="5"
                             Padding="15,7" 
                             FontSize="14"/>
                         <Button Content="Очистить"
-                            Name="ClearPatientBtn"
+                            Name="ClearRecordBtn"
                             Style="{StaticResource WarningBtn}"
                             Margin="5"
                             Padding="15,7" 
                             FontSize="14"/>
                         <Button Content="Удалить"
-                            Name="DeletePatientBtn"
+                            Name="DeleteRecordBtn"
                             Style="{StaticResource DangerBtn}"
                             Margin="5"
                             Padding="15,7" 
@@ -178,7 +228,7 @@
                    Grid.Column="0"
                    VerticalAlignment="Center"/>
                 <TextBox Style="{StaticResource PrimaryTB}" 
-                     Name="PatSearchTB" 
+                     Name="RecordSearchTB" 
                      Grid.Column="2" 
                      VerticalAlignment="Center"/>
             </Grid>
@@ -195,7 +245,7 @@
                    VerticalAlignment="Center"/>
                 <ComboBox Style="{StaticResource PrimaryCB}"
                      SelectedIndex="0"
-                     Name="StatusFilterhCB" 
+                     Name="StatusFilterCB" 
                      Grid.Column="2">
                     <ComboBoxItem>Все</ComboBoxItem>
                     <ComboBoxItem>Запланированные</ComboBoxItem>
@@ -208,47 +258,59 @@
             <!-- DataGrid -->
             <DataGrid Grid.Row="2"
                   Margin="10,5,10,10" 
-                  Name="PaientsDG" 
+                  Name="RecordsDG" 
                   AutoGenerateColumns="False" 
                   IsReadOnly="True"
-                  Style="{StaticResource PrimaryDataGrid}">
+                  Style="{StaticResource PrimaryDataGrid}" SelectionChanged="RecordsDG_SelectionChanged">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="ФИО" 
-                    Binding="{Binding FullName}" 
-                    Width="200"
-                    HeaderStyle="{StaticResource PrimaryDataGridColumnHeader}"
-                    ElementStyle="{StaticResource PrimaryDataGridCellText}"
-                    CellStyle="{StaticResource PrimaryDataGridCell}"/>
-                    <DataGridTextColumn Header="Дата рождения" 
-                    Binding="{Binding FormattedDateOfBirth}" 
-                    Width="100"
-                    HeaderStyle="{StaticResource PrimaryDataGridColumnHeader}"
-                    ElementStyle="{StaticResource PrimaryDataGridCellText}"
-                    CellStyle="{StaticResource PrimaryDataGridCell}"/>
-                    <DataGridTextColumn Header="Телефон" 
-                    Binding="{Binding Phone}" 
-                    Width="100"
-                    HeaderStyle="{StaticResource PrimaryDataGridColumnHeader}"
-                    ElementStyle="{StaticResource PrimaryDataGridCellText}"
-                    CellStyle="{StaticResource PrimaryDataGridCell}"/>
-                    <DataGridTextColumn Header="Эл. почта" 
-                    Binding="{Binding Email}" 
-                    Width="150"
-                    HeaderStyle="{StaticResource PrimaryDataGridColumnHeader}"
-                    ElementStyle="{StaticResource PrimaryDataGridCellText}"
-                    CellStyle="{StaticResource PrimaryDataGridCell}"/>
-                    <DataGridTextColumn Header="Симптом" 
-                    Binding="{Binding PatientDisease.DiseaseTitle}" 
-                    Width="120"
-                    HeaderStyle="{StaticResource PrimaryDataGridColumnHeader}"
-                    ElementStyle="{StaticResource PrimaryDataGridCellText}"
-                    CellStyle="{StaticResource PrimaryDataGridCell}"/>
-                    <DataGridTextColumn Header="Описание" 
-                    Binding="{Binding PatientDisease.DiseaseSymptom}" 
-                    Width="*"
-                    HeaderStyle="{StaticResource PrimaryDataGridColumnHeader}"
-                    ElementStyle="{StaticResource PrimaryDataGridCellText}"
-                    CellStyle="{StaticResource PrimaryDataGridCell}"/>
+                    <DataGridTextColumn Header="Врач" 
+        Binding="{Binding ActingDoctor.FullName}" 
+        Width="150"
+        HeaderStyle="{StaticResource PrimaryDataGridColumnHeader}"
+        ElementStyle="{StaticResource PrimaryDataGridCellText}"
+        CellStyle="{StaticResource PrimaryDataGridCell}"/>
+
+                    <DataGridTextColumn Header="Пациент" 
+        Binding="{Binding RecordedPatient.FullName}" 
+        Width="150"
+        HeaderStyle="{StaticResource PrimaryDataGridColumnHeader}"
+        ElementStyle="{StaticResource PrimaryDataGridCellText}"
+        CellStyle="{StaticResource PrimaryDataGridCell}"/>
+
+                    <DataGridTextColumn Header="Дата" 
+        Binding="{Binding FormattedDate}" 
+        Width="80"
+        HeaderStyle="{StaticResource PrimaryDataGridColumnHeader}"
+        ElementStyle="{StaticResource PrimaryDataGridCellText}"
+        CellStyle="{StaticResource PrimaryDataGridCell}"/>
+
+                    <DataGridTextColumn Header="Время" 
+        Binding="{Binding FormattedTimeRange}" 
+        Width="100"
+        HeaderStyle="{StaticResource PrimaryDataGridColumnHeader}"
+        ElementStyle="{StaticResource PrimaryDataGridCellText}"
+        CellStyle="{StaticResource PrimaryDataGridCell}"/>
+
+                    <DataGridTextColumn Header="Статус" 
+        Binding="{Binding Status}" 
+        Width="100"
+        HeaderStyle="{StaticResource PrimaryDataGridColumnHeader}"
+        ElementStyle="{StaticResource PrimaryDataGridCellText}"
+        CellStyle="{StaticResource PrimaryDataGridCell}"/>
+
+                    <DataGridTextColumn Header="Приписка" 
+        Binding="{Binding Postscript}" 
+        Width="150"
+        HeaderStyle="{StaticResource PrimaryDataGridColumnHeader}"
+        ElementStyle="{StaticResource PrimaryDataGridCellText}"
+        CellStyle="{StaticResource PrimaryDataGridCell}"/>
+
+                    <DataGridTextColumn Header="Доп данные" 
+        Binding="{Binding AdditionalInfo}" 
+        Width="*"
+        HeaderStyle="{StaticResource PrimaryDataGridColumnHeader}"
+        ElementStyle="{StaticResource PrimaryDataGridCellText}"
+        CellStyle="{StaticResource PrimaryDataGridCell}"/>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

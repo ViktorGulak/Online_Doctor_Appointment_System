@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfAppointment xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<HomeVisitAppointment>
+		<AppointmentId>1</AppointmentId>
+		<PatientId>1</PatientId>
+		<DoctorId>1</DoctorId>
+		<AppointmentDate>2024-11-19T00:00:00</AppointmentDate>
+		<StartTime>09:00:00</StartTime>
+		<EndTime>10:00:00</EndTime>
+		<Postscript>Пациент не может передвигаться самостоятельно</Postscript>
+		<Status>SCHEDULED</Status>
+		<City>Москва</City>
+		<StreetTitle>Ленина</StreetTitle>
+		<HouseNumber>15</HouseNumber>
+		<AppartmentNumber>42</AppartmentNumber>
+	</HomeVisitAppointment>
+	<InPersonAppointment>
+		<AppointmentId>2</AppointmentId>
+		<PatientId>2</PatientId>
+		<DoctorId>2</DoctorId>
+		<AppointmentDate>2024-11-20T00:00:00</AppointmentDate>
+		<StartTime>14:00:00</StartTime>
+		<EndTime>15:00:00</EndTime>
+		<Postscript>Плановый осмотр после операции</Postscript>
+		<Status>COMPLETED</Status>
+		<HospitalTitle>Городская больница №1</HospitalTitle>
+		<CabinetNumber>305</CabinetNumber>
+	</InPersonAppointment>
+	<OnlineAppointment>
+		<AppointmentId>3</AppointmentId>
+		<PatientId>1</PatientId>
+		<DoctorId>1</DoctorId>
+		<AppointmentDate>2024-11-21T00:00:00</AppointmentDate>
+		<StartTime>11:00:00</StartTime>
+		<EndTime>11:30:00</EndTime>
+		<Postscript>Консультация по результатам анализов</Postscript>
+		<Status>SCHEDULED</Status>
+		<Link>https://meet.example.com/consultation123</Link>
+		<ChatCode>CONSULT-456</ChatCode>
+	</OnlineAppointment>
+</ArrayOfAppointment>
