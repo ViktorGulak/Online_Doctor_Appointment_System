@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Online_Doctor_Appointment_System.Views"
         mc:Ignorable="d"
-        Title="Записи к варачам" Height="949.2" Width="1100" WindowState="Maximized">
+        Title="Записи к варачам" Height="1037.2" Width="1100" WindowState="Maximized">
     <Grid Background="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionBrushKey}}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -61,10 +61,6 @@
                             <StackPanel Grid.Column="0" Margin="0,5">
                                 <Label Content="Статус" FontSize="16" Foreground="#FF7B16B6"/>
                                 <ComboBox Style="{StaticResource PrimaryCB}" Name="StatusCB">
-                                    <ComboBoxItem>Запланирован</ComboBoxItem>
-                                    <ComboBoxItem>Выполнен</ComboBoxItem>
-                                    <ComboBoxItem>Отменён</ComboBoxItem>
-                                    <ComboBoxItem>Не явка</ComboBoxItem>
                                 </ComboBox>
                             </StackPanel>
                             <StackPanel Grid.Column="2" Margin="0,5">
@@ -183,25 +179,25 @@
                             Style="{StaticResource PrimaryBtn}"
                             Margin="5"
                             Padding="15,7" 
-                            FontSize="14"/>
+                            FontSize="14" Click="AddRecordBtn_Click"/>
                         <Button Content="Изменить"
                             Name="UpdateRecordBtn"
                             Style="{StaticResource SuccessBtn}"
                             Margin="5"
                             Padding="15,7" 
-                            FontSize="14"/>
+                            FontSize="14" Click="UpdateRecordBtn_Click"/>
                         <Button Content="Очистить"
                             Name="ClearRecordBtn"
                             Style="{StaticResource WarningBtn}"
                             Margin="5"
                             Padding="15,7" 
-                            FontSize="14"/>
+                            FontSize="14" Click="ClearRecordBtn_Click"/>
                         <Button Content="Удалить"
                             Name="DeleteRecordBtn"
                             Style="{StaticResource DangerBtn}"
                             Margin="5"
                             Padding="15,7" 
-                            FontSize="14"/>
+                            FontSize="14" Click="DeleteRecordBtn_Click"/>
                     </UniformGrid>
                 </StackPanel>
             </StackPanel>
@@ -230,7 +226,7 @@
                 <TextBox Style="{StaticResource PrimaryTB}" 
                      Name="RecordSearchTB" 
                      Grid.Column="2" 
-                     VerticalAlignment="Center"/>
+                     VerticalAlignment="Center" SelectionChanged="RecordSearchTB_SelectionChanged"/>
             </Grid>
             <Grid Grid.Row="1" Margin="10,5,10,0">
                 <Grid.ColumnDefinitions>
@@ -246,12 +242,8 @@
                 <ComboBox Style="{StaticResource PrimaryCB}"
                      SelectedIndex="0"
                      Name="StatusFilterCB" 
-                     Grid.Column="2">
-                    <ComboBoxItem>Все</ComboBoxItem>
-                    <ComboBoxItem>Запланированные</ComboBoxItem>
-                    <ComboBoxItem>Выполненые</ComboBoxItem>
-                    <ComboBoxItem>Отменённые</ComboBoxItem>
-                    <ComboBoxItem>Не явки</ComboBoxItem>
+                     Grid.Column="2" SelectionChanged="StatusFilterCB_SelectionChanged">
+                    
                 </ComboBox>
             </Grid>
 
@@ -292,7 +284,7 @@
         CellStyle="{StaticResource PrimaryDataGridCell}"/>
 
                     <DataGridTextColumn Header="Статус" 
-        Binding="{Binding Status}" 
+        Binding="{Binding DisplayedStatus}" 
         Width="100"
         HeaderStyle="{StaticResource PrimaryDataGridColumnHeader}"
         ElementStyle="{StaticResource PrimaryDataGridCellText}"

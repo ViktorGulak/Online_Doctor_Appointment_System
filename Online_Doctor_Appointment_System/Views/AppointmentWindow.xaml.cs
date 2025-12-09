@@ -1,6 +1,7 @@
 ﻿using Online_Doctor_Appointment_System.Models;
 using Online_Doctor_Appointment_System.Repositories;
 using Online_Doctor_Appointment_System.Services;
+using Online_Doctor_Appointment_System.Types;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,7 +45,7 @@ namespace Online_Doctor_Appointment_System.Views
 
             // Загрузка данных
             LoadData();
-            TestSimpleLoad();
+            //TestSimpleLoad();
         }
 
 
@@ -58,6 +59,8 @@ namespace Online_Doctor_Appointment_System.Views
 
                 // Загружаем записи
                 LoadAppointments();
+                InitializeStatusComboBoxes();
+                InitializeTimeFields();
             }
             catch (Exception ex)
             {
@@ -65,41 +68,6 @@ namespace Online_Doctor_Appointment_System.Views
             }
         }
 
-        private void TestSimpleLoad()
-        {
-            try
-            {
-                // 1. Создаем репозиторий
-                var repo = new XmlAppointmentRepository();
-
-                // 2. Получаем все записи
-                var appointments = repo.GetAll();
-
-                // 4. Если что-то загрузилось - показываем
-                if (appointments.Count > 0)
-                {
-                    RecordsDG.ItemsSource = appointments;
-
-                    // Тестируем связывание с врачами и пациентами
-                    var doctorService = new DoctorService(new XmlDoctorRepository());
-                    var patientService = new PatientService(new XmlPatientRepository());
-
-                    foreach (var appointment in appointments)
-                    {
-                        appointment.ActingDoctor = doctorService.GetDoctorById(appointment.DoctorId);
-                        appointment.RecordedPatient = patientService.GetPatientById(appointment.PatientId);
-                    }
-
-                    // Обновляем DataGrid
-                    RecordsDG.ItemsSource = null;
-                    RecordsDG.ItemsSource = appointments;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Тестовая загрузка не удалась: {ex.Message}");
-            }
-        }
         private void LoadDoctors()
         {
             var doctors = _doctorService.GetAllDoctors();
@@ -120,6 +88,56 @@ namespace Online_Doctor_Appointment_System.Views
         {
             _allAppointments = _appointmentService.GetAllAppointments();
             RecordsDG.ItemsSource = _allAppointments;
+        }
+
+        private void InitializeTimeFields()
+        {
+            StartTimeTB.Text = "09:00";
+            EndTimeTB.Text = "10:00";
+        }
+        private void InitializeStatusComboBoxes()
+        {
+            // Для формы
+            StatusCB.ItemsSource = Enum.GetValues(typeof(AppointmentStatus))
+                .Cast<AppointmentStatus>()
+                .Select(s => new { Value = s, Display = GetStatusDisplayName(s) })
+                .ToList();
+            StatusCB.DisplayMemberPath = "Display";
+            StatusCB.SelectedValuePath = "Value";
+
+            // Для фильтра
+            StatusFilterCB.ItemsSource = new List<object>
+        {
+            new { Value = "ALL", Display = "Все" },
+            new { Value = "SCHEDULED", Display = "Запланированные" },
+            new { Value = "COMPLETED", Display = "Выполненные" },
+            new { Value = "CANCELLED", Display = "Отменённые" },
+            new { Value = "NO_SHOW", Display = "Не явки" }
+        };
+            StatusFilterCB.DisplayMemberPath = "Display";
+            StatusFilterCB.SelectedValuePath = "Value";
+            StatusFilterCB.SelectedIndex = 0;
+        }
+
+        private string GetStatusDisplayName(AppointmentStatus status)
+        {
+            if (status == AppointmentStatus.SCHEDULED)
+            {
+                return "Запланирован";
+            }
+            else if (status == AppointmentStatus.COMPLETED)
+            {
+                return "Выполнен";
+            }
+            else if (status == AppointmentStatus.CANCELLED)
+            {
+                return "Отменён";
+            }
+            else if (status == AppointmentStatus.NO_SHOW)
+            {
+                return "Не явка";
+            }
+            else return "Неопределено";
         }
 
         // Обработчик выбора в DataGrid
@@ -248,34 +266,337 @@ namespace Online_Doctor_Appointment_System.Views
         // Кнопка очистки
         private void ClearRecordBtn_Click(object sender, RoutedEventArgs e)
         {
-            ClearForm();
+            ClearTextFields();
         }
 
-        private void ClearForm()
+        private void ClearTextFields()
         {
             ProfDocCB.SelectedIndex = -1;
             PatFullNameCB.SelectedIndex = -1;
-            DiagnosisTB.Text = "";
+            DiagnosisTB.Clear();
             StatusCB.SelectedIndex = 0;
             DateAdmissionDP.SelectedDate = null;
             StartTimeTB.Text = "09:00";
             EndTimeTB.Text = "10:00";
-            PostscriptTB.Text = "";
+            PostscriptTB.Clear();
 
-            PatientCityTB.Text = "";
-            PatientStreetTB.Text = "";
-            HouseNumberTB.Text = "";
-            AppartmentNumberTB.Text = "";
+            PatientCityTB.Clear();
+            PatientStreetTB.Clear();
+            HouseNumberTB.Clear();
+            AppartmentNumberTB.Clear();
 
-            HospitalTB.Text = "";
-            CabinetTB.Text = "";
+            HospitalTB.Clear();
+            CabinetTB.Clear();
 
-            LinkTB.Text = "";
-            ConnectionCodeTB.Text = "";
+            LinkTB.Clear();
+            ConnectionCodeTB.Clear();
 
             TypeOfReceptionCB.SelectedIndex = 0;
             _selectedAppointment = null;
             RecordsDG.SelectedItem = null;
+
+            RecordSearchTB.Clear();
+            StatusFilterCB.SelectedIndex = 0;
+        }
+        private bool ValidateForm()
+        {
+            if (ProfDocCB.SelectedItem == null)
+            {
+                MessageBox.Show("Выберите врача!");
+                return false;
+            }
+
+            if (PatFullNameCB.SelectedItem == null)
+            {
+                MessageBox.Show("Выберите пациента!");
+                return false;
+            }
+
+            if (DateAdmissionDP.SelectedDate == null)
+            {
+                MessageBox.Show("Выберите дату приема!");
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(StartTimeTB.Text) ||
+                string.IsNullOrWhiteSpace(EndTimeTB.Text))
+            {
+                MessageBox.Show("Укажите время начала и окончания приема!");
+                return false;
+            }
+
+            if (!TimeSpan.TryParse(StartTimeTB.Text, out TimeSpan startTime) ||
+                !TimeSpan.TryParse(EndTimeTB.Text, out TimeSpan endTime))
+            {
+                MessageBox.Show("Некорректный формат времени! Используйте HH:mm");
+                return false;
+            }
+
+            if (startTime >= endTime)
+            {
+                MessageBox.Show("Время начала должно быть раньше времени окончания!");
+                return false;
+            }
+
+            // Проверки для конкретных типов
+            switch (TypeOfReceptionCB.SelectedIndex)
+            {
+                case 0: // Приём в поликлинике
+                    if (string.IsNullOrWhiteSpace(HospitalTB.Text))
+                    {
+                        MessageBox.Show("Укажите название больницы!");
+                        return false;
+                    }
+                    break;
+
+                case 1: // Выезд на дом
+                    if (string.IsNullOrWhiteSpace(PatientCityTB.Text) ||
+                        string.IsNullOrWhiteSpace(PatientStreetTB.Text) ||
+                        string.IsNullOrWhiteSpace(HouseNumberTB.Text))
+                    {
+                        MessageBox.Show("Заполните все поля адреса!");
+                        return false;
+                    }
+                    break;
+
+                case 2: // Онлайн
+                    if (string.IsNullOrWhiteSpace(LinkTB.Text))
+                    {
+                        MessageBox.Show("Укажите ссылку на консультацию!");
+                        return false;
+                    }
+                    break;
+            }
+
+            return true;
+        }
+
+        private AppointmentType GetSelectedAppointmentType()
+        {
+            AppointmentType appType;
+            switch (TypeOfReceptionCB.SelectedIndex)
+            {
+                case 0:
+                    appType = AppointmentType.InPerson;
+                    break;
+                case 1:
+                    appType = AppointmentType.HomeVisit;
+                    break;
+                case 2:
+                    appType = AppointmentType.Online;
+                    break;
+                default:
+                    appType = AppointmentType.HomeVisit;
+                    break;
+            }
+            return appType;
+            
+        }
+
+        private TimeSpan ParseTime(string timeText)
+        {
+            if (TimeSpan.TryParse(timeText, out TimeSpan time))
+                return time;
+
+            if (timeText.Contains(":"))
+            {
+                var parts = timeText.Split(':');
+                if (parts.Length >= 2 &&
+                    int.TryParse(parts[0], out int hours) &&
+                    int.TryParse(parts[1], out int minutes))
+                {
+                    return new TimeSpan(hours, minutes, 0);
+                }
+            }
+
+            return new TimeSpan(9, 0, 0); // По умолчанию 9:00
+        }
+
+        private Appointment CreateAppointmentFromForm(AppointmentType type)
+        {
+            // Получаем ID врача и пациента
+            long doctorId = ProfDocCB.SelectedValue is long docId ? docId : 0;
+            long patientId = PatFullNameCB.SelectedValue is long patId ? patId : 0;
+
+            // Парсим время
+            TimeSpan startTime = ParseTime(StartTimeTB.Text);
+            TimeSpan endTime = ParseTime(EndTimeTB.Text);
+
+            // Получаем статус
+            var status = StatusCB.SelectedValue is AppointmentStatus stat ? stat : AppointmentStatus.SCHEDULED;
+            if(type == AppointmentType.HomeVisit)
+            {
+                return _appointmentService.CreateAppointment(
+                    type: AppointmentType.HomeVisit,
+                    patientId: patientId,
+                    doctorId: doctorId,
+                    appointmentDate: DateAdmissionDP.SelectedDate ?? DateTime.Now,
+                    startTime: startTime,
+                    endTime: endTime,
+                    postscript: PostscriptTB.Text,
+                    status: status,
+                    city: PatientCityTB.Text,
+                    streetTitle: PatientStreetTB.Text,
+                    houseNumber: HouseNumberTB.Text,
+                    appartmentNumber: AppartmentNumberTB.Text);
+            }
+            else if (type == AppointmentType.InPerson)
+            {
+                return _appointmentService.CreateAppointment(
+                    type: AppointmentType.InPerson,
+                    patientId: patientId,
+                    doctorId: doctorId,
+                    appointmentDate: DateAdmissionDP.SelectedDate ?? DateTime.Now,
+                    startTime: startTime,
+                    endTime: endTime,
+                    postscript: PostscriptTB.Text,
+                    status: status,
+                    hospitalTitle: HospitalTB.Text,
+                    cabinetNumber: CabinetTB.Text);
+            }
+            else if (type == AppointmentType.Online)
+            {
+                return _appointmentService.CreateAppointment(
+                    type: AppointmentType.Online,
+                    patientId: patientId,
+                    doctorId: doctorId,
+                    appointmentDate: DateAdmissionDP.SelectedDate ?? DateTime.Now,
+                    startTime: startTime,
+                    endTime: endTime,
+                    postscript: PostscriptTB.Text,
+                    status: status,
+                    link: LinkTB.Text,
+                    chatCode: ConnectionCodeTB.Text);
+            }
+            else
+            {
+                throw new Exception("Не определённый тип записи."); ;
+            }
+        }
+
+        private void AddRecordBtn_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (!ValidateForm())
+                    return;
+
+                var appointmentType = GetSelectedAppointmentType();
+                var appointment = CreateAppointmentFromForm(appointmentType);
+
+                _appointmentService.AddAppointment(appointment);
+
+                LoadAppointments();
+                ClearTextFields();
+                MessageBox.Show("Запись успешно добавлена!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при добавлении: {ex.Message}");
+            }
+        }
+
+        private void UpdateRecordBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (_selectedAppointment == null)
+            {
+                MessageBox.Show("Выберите запись для редактирования!");
+                return;
+            }
+
+            try
+            {
+                if (!ValidateForm())
+                    return;
+
+                var appointmentType = GetSelectedAppointmentType();
+                var updatedAppointment = CreateAppointmentFromForm(appointmentType);
+                updatedAppointment.AppointmentId = _selectedAppointment.AppointmentId;
+
+                _appointmentService.UpdateAppointment(updatedAppointment);
+
+                LoadAppointments();
+                MessageBox.Show("Запись успешно обновлена!");
+                ClearTextFields();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при обновлении: {ex.Message}");
+            }
+        }
+
+        private void DeleteRecordBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (_selectedAppointment == null)
+            {
+                MessageBox.Show("Выберите запись для удаления!");
+                return;
+            }
+
+            var result = MessageBox.Show($"Удалить запись #{_selectedAppointment.AppointmentId}?",
+                                       "Подтверждение удаления",
+                                       MessageBoxButton.YesNo);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    _appointmentService.DeleteAppointment(_selectedAppointment.AppointmentId);
+                    LoadAppointments();
+                    ClearTextFields();
+                    MessageBox.Show("Запись удалена!");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Ошибка при удалении: {ex.Message}");
+                }
+            }
+        }
+
+        private void RecordSearchTB_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+            string searchTerm = RecordSearchTB.Text.Trim();
+
+            if (string.IsNullOrWhiteSpace(searchTerm))
+            {
+                LoadAppointments();
+            }
+            else
+            {
+                var searchResults = _appointmentService.SearchAppointments(searchTerm);
+                RecordsDG.ItemsSource = searchResults;
+            }
+        }
+
+        private void StatusFilterCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (_allAppointments == null) return;
+
+            var selected = StatusFilterCB.SelectedValue as string;
+            if (selected == "ALL")
+            {
+                RecordsDG.ItemsSource = _allAppointments;
+            }
+            else if(selected == "SCHEDULED")
+            {
+                RecordsDG.ItemsSource = _appointmentService.FilterAppointmentByStatus(AppointmentStatus.SCHEDULED);
+            }
+            else if (selected == "COMPLETED")
+            {
+                RecordsDG.ItemsSource = _appointmentService.FilterAppointmentByStatus(AppointmentStatus.COMPLETED);
+            }
+            else if (selected == "CANCELLED")
+            {
+                RecordsDG.ItemsSource = _appointmentService.FilterAppointmentByStatus(AppointmentStatus.CANCELLED);
+            }
+            else if (selected == "NO_SHOW")
+            {
+                RecordsDG.ItemsSource = _appointmentService.FilterAppointmentByStatus(AppointmentStatus.NO_SHOW);
+            }
+            else
+            {
+                RecordsDG.ItemsSource = _allAppointments;
+            }
         }
     }
 }

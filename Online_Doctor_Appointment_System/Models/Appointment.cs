@@ -125,6 +125,32 @@ namespace Online_Doctor_Appointment_System.Models
         }
 
         [XmlIgnore]
+        public string DisplayedStatus
+        {
+            get
+            {
+                if (Status == AppointmentStatus.SCHEDULED)
+                {
+                    return "Запланирован";
+                }
+                else if (Status == AppointmentStatus.COMPLETED)
+                {
+                    return "Выполнен";
+                }
+                else if (Status == AppointmentStatus.CANCELLED)
+                {
+                    return "Отменён";
+                }
+                else if (Status == AppointmentStatus.NO_SHOW)
+                {
+                    return "Не явка";
+                }
+                else return "";
+            }
+        }
+
+
+        [XmlIgnore]
         public string FormattedDate => AppointmentDate.ToString("dd.MM.yyyy");
 
         [XmlIgnore]

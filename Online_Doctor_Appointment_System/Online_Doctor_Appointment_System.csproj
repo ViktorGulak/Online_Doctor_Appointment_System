@@ -74,6 +74,7 @@
     <Compile Include="Services\SpecializationService.cs" />
     <Compile Include="Types\AppointmentStatus.cs" />
     <Compile Include="Models\Appointment.cs" />
+    <Compile Include="Types\AppointmentType.cs" />
     <Compile Include="Types\IMedicalAppointment.cs" />
     <Compile Include="Views\AppointmentWindow.xaml.cs">
       <DependentUpon>AppointmentWindow.xaml</DependentUpon>

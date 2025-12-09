@@ -1,41 +1,364 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<ArrayOfAppointment xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-	<HomeVisitAppointment>
-		<AppointmentId>1</AppointmentId>
-		<PatientId>1</PatientId>
-		<DoctorId>1</DoctorId>
-		<AppointmentDate>2024-11-19T00:00:00</AppointmentDate>
-		<StartTime>09:00:00</StartTime>
-		<EndTime>10:00:00</EndTime>
-		<Postscript>Пациент не может передвигаться самостоятельно</Postscript>
-		<Status>SCHEDULED</Status>
-		<City>Москва</City>
-		<StreetTitle>Ленина</StreetTitle>
-		<HouseNumber>15</HouseNumber>
-		<AppartmentNumber>42</AppartmentNumber>
-	</HomeVisitAppointment>
-	<InPersonAppointment>
-		<AppointmentId>2</AppointmentId>
-		<PatientId>2</PatientId>
-		<DoctorId>2</DoctorId>
-		<AppointmentDate>2024-11-20T00:00:00</AppointmentDate>
-		<StartTime>14:00:00</StartTime>
-		<EndTime>15:00:00</EndTime>
-		<Postscript>Плановый осмотр после операции</Postscript>
-		<Status>COMPLETED</Status>
-		<HospitalTitle>Городская больница №1</HospitalTitle>
-		<CabinetNumber>305</CabinetNumber>
-	</InPersonAppointment>
-	<OnlineAppointment>
-		<AppointmentId>3</AppointmentId>
-		<PatientId>1</PatientId>
-		<DoctorId>1</DoctorId>
-		<AppointmentDate>2024-11-21T00:00:00</AppointmentDate>
-		<StartTime>11:00:00</StartTime>
-		<EndTime>11:30:00</EndTime>
-		<Postscript>Консультация по результатам анализов</Postscript>
-		<Status>SCHEDULED</Status>
-		<Link>https://meet.example.com/consultation123</Link>
-		<ChatCode>CONSULT-456</ChatCode>
-	</OnlineAppointment>
+<ArrayOfAppointment>
+  <HomeVisitAppointment>
+    <City>Москва</City>
+    <StreetTitle>Ленина</StreetTitle>
+    <HouseNumber>15</HouseNumber>
+    <AppartmentNumber>42</AppartmentNumber>
+    <AppointmentId>1</AppointmentId>
+    <PatientId>1</PatientId>
+    <DoctorId>1</DoctorId>
+    <AppointmentDate>2024-11-19T00:00:00</AppointmentDate>
+    <StartTime>09:00:00</StartTime>
+    <EndTime>10:00:00</EndTime>
+    <Postscript>Пациент не может передвигаться самостоятельно</Postscript>
+    <Status>SCHEDULED</Status>
+  </HomeVisitAppointment>
+  <HomeVisitAppointment>
+    <City>Санкт-Петербург</City>
+    <StreetTitle>Невский проспект</StreetTitle>
+    <HouseNumber>25</HouseNumber>
+    <AppartmentNumber>13</AppartmentNumber>
+    <AppointmentId>6</AppointmentId>
+    <PatientId>10</PatientId>
+    <DoctorId>10</DoctorId>
+    <AppointmentDate>2024-09-22T00:00:00</AppointmentDate>
+    <StartTime>15:00:00</StartTime>
+    <EndTime>16:30:00</EndTime>
+    <Postscript>Пациент с мигренью, тяжелое состояние</Postscript>
+    <Status>COMPLETED</Status>
+  </HomeVisitAppointment>
+  <HomeVisitAppointment>
+    <City>Москва</City>
+    <StreetTitle>Тверская</StreetTitle>
+    <HouseNumber>8</HouseNumber>
+    <AppartmentNumber>7</AppartmentNumber>
+    <AppointmentId>10</AppointmentId>
+    <PatientId>9</PatientId>
+    <DoctorId>6</DoctorId>
+    <AppointmentDate>2024-10-30T00:00:00</AppointmentDate>
+    <StartTime>16:00:00</StartTime>
+    <EndTime>17:30:00</EndTime>
+    <Postscript>Острый приступ панкреатита</Postscript>
+    <Status>COMPLETED</Status>
+  </HomeVisitAppointment>
+  <HomeVisitAppointment>
+    <City>Москва</City>
+    <StreetTitle>Арбат</StreetTitle>
+    <HouseNumber>12</HouseNumber>
+    <AppartmentNumber>24</AppartmentNumber>
+    <AppointmentId>14</AppointmentId>
+    <PatientId>4</PatientId>
+    <DoctorId>8</DoctorId>
+    <AppointmentDate>2024-04-10T00:00:00</AppointmentDate>
+    <StartTime>11:00:00</StartTime>
+    <EndTime>12:00:00</EndTime>
+    <Postscript>ОРВИ с осложнениями на дыхательные пути</Postscript>
+    <Status>COMPLETED</Status>
+  </HomeVisitAppointment>
+  <HomeVisitAppointment>
+    <City>Москва</City>
+    <StreetTitle>Профсоюзная</StreetTitle>
+    <HouseNumber>45</HouseNumber>
+    <AppartmentNumber>18</AppartmentNumber>
+    <AppointmentId>19</AppointmentId>
+    <PatientId>4</PatientId>
+    <DoctorId>5</DoctorId>
+    <AppointmentDate>2024-11-28T00:00:00</AppointmentDate>
+    <StartTime>12:00:00</StartTime>
+    <EndTime>13:00:00</EndTime>
+    <Postscript>Вызов на дом для ребенка с температурой</Postscript>
+    <Status>SCHEDULED</Status>
+  </HomeVisitAppointment>
+  <HomeVisitAppointment>
+    <City>Москва</City>
+    <StreetTitle>Ленинградский проспект</StreetTitle>
+    <HouseNumber>67</HouseNumber>
+    <AppartmentNumber>89</AppartmentNumber>
+    <AppointmentId>24</AppointmentId>
+    <PatientId>5</PatientId>
+    <DoctorId>1</DoctorId>
+    <AppointmentDate>2024-06-08T00:00:00</AppointmentDate>
+    <StartTime>09:30:00</StartTime>
+    <EndTime>10:30:00</EndTime>
+    <Postscript>Измерение давления на дому</Postscript>
+    <Status>COMPLETED</Status>
+  </HomeVisitAppointment>
+  <HomeVisitAppointment>
+    <City>Москва</City>
+    <StreetTitle>Пушкина</StreetTitle>
+    <HouseNumber>10</HouseNumber>
+    <AppartmentNumber>5</AppartmentNumber>
+    <AppointmentId>28</AppointmentId>
+    <PatientId>2</PatientId>
+    <DoctorId>7</DoctorId>
+    <AppointmentDate>2024-03-10T00:00:00</AppointmentDate>
+    <StartTime>14:30:00</StartTime>
+    <EndTime>15:30:00</EndTime>
+    <Postscript>Острая боль в спине, вызов на дом</Postscript>
+    <Status>COMPLETED</Status>
+  </HomeVisitAppointment>
+  <InPersonAppointment>
+    <HospitalTitle>Городская больница №1</HospitalTitle>
+    <CabinetNumber>305</CabinetNumber>
+    <AppointmentId>2</AppointmentId>
+    <PatientId>2</PatientId>
+    <DoctorId>2</DoctorId>
+    <AppointmentDate>2024-11-20T00:00:00</AppointmentDate>
+    <StartTime>14:00:00</StartTime>
+    <EndTime>15:00:00</EndTime>
+    <Postscript>Плановый осмотр после операции</Postscript>
+    <Status>COMPLETED</Status>
+  </InPersonAppointment>
+  <InPersonAppointment>
+    <HospitalTitle>Неврологический центр</HospitalTitle>
+    <CabinetNumber>101</CabinetNumber>
+    <AppointmentId>5</AppointmentId>
+    <PatientId>4</PatientId>
+    <DoctorId>4</DoctorId>
+    <AppointmentDate>2024-10-15T00:00:00</AppointmentDate>
+    <StartTime>10:00:00</StartTime>
+    <EndTime>11:00:00</EndTime>
+    <Postscript>Плановая консультация по ОРВИ с неврологическими осложнениями</Postscript>
+    <Status>COMPLETED</Status>
+  </InPersonAppointment>
+  <InPersonAppointment>
+    <HospitalTitle>Кардиологический диспансер</HospitalTitle>
+    <CabinetNumber>204</CabinetNumber>
+    <AppointmentId>7</AppointmentId>
+    <PatientId>5</PatientId>
+    <DoctorId>3</DoctorId>
+    <AppointmentDate>2024-12-05T00:00:00</AppointmentDate>
+    <StartTime>11:30:00</StartTime>
+    <EndTime>12:30:00</EndTime>
+    <Postscript>Контроль артериального давления</Postscript>
+    <Status>SCHEDULED</Status>
+  </InPersonAppointment>
+  <InPersonAppointment>
+    <HospitalTitle>Городская больница №2</HospitalTitle>
+    <CabinetNumber>156</CabinetNumber>
+    <AppointmentId>9</AppointmentId>
+    <PatientId>3</PatientId>
+    <DoctorId>6</DoctorId>
+    <AppointmentDate>2024-11-25T00:00:00</AppointmentDate>
+    <StartTime>13:00:00</StartTime>
+    <EndTime>14:00:00</EndTime>
+    <Postscript>ФГДС и консультация по гастриту</Postscript>
+    <Status>SCHEDULED</Status>
+  </InPersonAppointment>
+  <InPersonAppointment>
+    <HospitalTitle>Травматологический пункт</HospitalTitle>
+    <CabinetNumber>42</CabinetNumber>
+    <AppointmentId>11</AppointmentId>
+    <PatientId>2</PatientId>
+    <DoctorId>7</DoctorId>
+    <AppointmentDate>2024-07-18T00:00:00</AppointmentDate>
+    <StartTime>10:30:00</StartTime>
+    <EndTime>11:30:00</EndTime>
+    <Postscript>Повторный прием по боли в спине</Postscript>
+    <Status>COMPLETED</Status>
+  </InPersonAppointment>
+  <InPersonAppointment>
+    <HospitalTitle>Пульмонологический центр</HospitalTitle>
+    <CabinetNumber>88</CabinetNumber>
+    <AppointmentId>13</AppointmentId>
+    <PatientId>8</PatientId>
+    <DoctorId>8</DoctorId>
+    <AppointmentDate>2024-05-22T00:00:00</AppointmentDate>
+    <StartTime>09:30:00</StartTime>
+    <EndTime>10:30:00</EndTime>
+    <Postscript>Лечение бронхита</Postscript>
+    <Status>COMPLETED</Status>
+  </InPersonAppointment>
+  <InPersonAppointment>
+    <HospitalTitle>Аллергологический центр</HospitalTitle>
+    <CabinetNumber>33</CabinetNumber>
+    <AppointmentId>15</AppointmentId>
+    <PatientId>6</PatientId>
+    <DoctorId>9</DoctorId>
+    <AppointmentDate>2024-12-10T00:00:00</AppointmentDate>
+    <StartTime>13:00:00</StartTime>
+    <EndTime>14:00:00</EndTime>
+    <Postscript>Аллергопробы</Postscript>
+    <Status>SCHEDULED</Status>
+  </InPersonAppointment>
+  <InPersonAppointment>
+    <HospitalTitle>Поликлиника №3</HospitalTitle>
+    <CabinetNumber>15</CabinetNumber>
+    <AppointmentId>17</AppointmentId>
+    <PatientId>1</PatientId>
+    <DoctorId>1</DoctorId>
+    <AppointmentDate>2024-02-28T00:00:00</AppointmentDate>
+    <StartTime>08:45:00</StartTime>
+    <EndTime>09:30:00</EndTime>
+    <Postscript>Первичный прием с головной болью</Postscript>
+    <Status>NO_SHOW</Status>
+  </InPersonAppointment>
+  <InPersonAppointment>
+    <HospitalTitle>Хирургическое отделение</HospitalTitle>
+    <CabinetNumber>210</CabinetNumber>
+    <AppointmentId>18</AppointmentId>
+    <PatientId>2</PatientId>
+    <DoctorId>2</DoctorId>
+    <AppointmentDate>2024-01-20T00:00:00</AppointmentDate>
+    <StartTime>10:00:00</StartTime>
+    <EndTime>11:00:00</EndTime>
+    <Postscript>Предоперационный осмотр</Postscript>
+    <Status>COMPLETED</Status>
+  </InPersonAppointment>
+  <InPersonAppointment>
+    <HospitalTitle>Городская больница №1</HospitalTitle>
+    <CabinetNumber>105</CabinetNumber>
+    <AppointmentId>22</AppointmentId>
+    <PatientId>3</PatientId>
+    <DoctorId>1</DoctorId>
+    <AppointmentDate>2024-07-05T00:00:00</AppointmentDate>
+    <StartTime>14:00:00</StartTime>
+    <EndTime>15:00:00</EndTime>
+    <Postscript>Плановый осмотр терапевта</Postscript>
+    <Status>NO_SHOW</Status>
+  </InPersonAppointment>
+  <InPersonAppointment>
+    <HospitalTitle>Неврологический центр</HospitalTitle>
+    <CabinetNumber>102</CabinetNumber>
+    <AppointmentId>23</AppointmentId>
+    <PatientId>10</PatientId>
+    <DoctorId>10</DoctorId>
+    <AppointmentDate>2024-08-25T00:00:00</AppointmentDate>
+    <StartTime>11:00:00</StartTime>
+    <EndTime>12:00:00</EndTime>
+    <Postscript>Контрольный прием по мигрени</Postscript>
+    <Status>CANCELLED</Status>
+  </InPersonAppointment>
+  <InPersonAppointment>
+    <HospitalTitle>Поликлиника №5</HospitalTitle>
+    <CabinetNumber>77</CabinetNumber>
+    <AppointmentId>25</AppointmentId>
+    <PatientId>8</PatientId>
+    <DoctorId>8</DoctorId>
+    <AppointmentDate>2024-12-12T00:00:00</AppointmentDate>
+    <StartTime>15:00:00</StartTime>
+    <EndTime>16:00:00</EndTime>
+    <Postscript>Повторный прием по бронхиту</Postscript>
+    <Status>SCHEDULED</Status>
+  </InPersonAppointment>
+  <InPersonAppointment>
+    <HospitalTitle>Городская больница №1</HospitalTitle>
+    <CabinetNumber>50</CabinetNumber>
+    <AppointmentId>27</AppointmentId>
+    <PatientId>6</PatientId>
+    <DoctorId>9</DoctorId>
+    <AppointmentDate>2024-01-15T00:00:00</AppointmentDate>
+    <StartTime>10:00:00</StartTime>
+    <EndTime>11:00:00</EndTime>
+    <Postscript>Первичный прием аллерголога</Postscript>
+    <Status>COMPLETED</Status>
+  </InPersonAppointment>
+  <InPersonAppointment>
+    <HospitalTitle>Гастроэнтерологический центр</HospitalTitle>
+    <CabinetNumber>25</CabinetNumber>
+    <AppointmentId>29</AppointmentId>
+    <PatientId>3</PatientId>
+    <DoctorId>6</DoctorId>
+    <AppointmentDate>2024-02-14T00:00:00</AppointmentDate>
+    <StartTime>11:00:00</StartTime>
+    <EndTime>12:00:00</EndTime>
+    <Postscript>Повторный прием по гастриту</Postscript>
+    <Status>COMPLETED</Status>
+  </InPersonAppointment>
+  <OnlineAppointment>
+    <Link>https://online-medic.ru</Link>
+    <ChatCode>117325</ChatCode>
+    <AppointmentId>4</AppointmentId>
+    <PatientId>6</PatientId>
+    <DoctorId>1</DoctorId>
+    <AppointmentDate>2024-11-21T00:00:00</AppointmentDate>
+    <StartTime>12:00:00</StartTime>
+    <EndTime>13:30:00</EndTime>
+    <Postscript>Консультация по результатам анализов и назначение курса лечения</Postscript>
+    <Status>COMPLETED</Status>
+  </OnlineAppointment>
+  <OnlineAppointment>
+    <Link>https://cardio-consult.ru</Link>
+    <ChatCode>889012</ChatCode>
+    <AppointmentId>8</AppointmentId>
+    <PatientId>5</PatientId>
+    <DoctorId>3</DoctorId>
+    <AppointmentDate>2024-08-14T00:00:00</AppointmentDate>
+    <StartTime>09:00:00</StartTime>
+    <EndTime>09:45:00</EndTime>
+    <Postscript>Первичная консультация по гипертонии</Postscript>
+    <Status>COMPLETED</Status>
+  </OnlineAppointment>
+  <OnlineAppointment>
+    <Link>https://ortoped-online.com</Link>
+    <ChatCode>334455</ChatCode>
+    <AppointmentId>12</AppointmentId>
+    <PatientId>7</PatientId>
+    <DoctorId>7</DoctorId>
+    <AppointmentDate>2024-06-12T00:00:00</AppointmentDate>
+    <StartTime>14:00:00</StartTime>
+    <EndTime>14:45:00</EndTime>
+    <Postscript>Консультация по остеохондрозу</Postscript>
+    <Status>CANCELLED</Status>
+  </OnlineAppointment>
+  <OnlineAppointment>
+    <Link>https://allergy-help.ru</Link>
+    <ChatCode>667788</ChatCode>
+    <AppointmentId>16</AppointmentId>
+    <PatientId>6</PatientId>
+    <DoctorId>9</DoctorId>
+    <AppointmentDate>2024-03-15T00:00:00</AppointmentDate>
+    <StartTime>15:30:00</StartTime>
+    <EndTime>16:15:00</EndTime>
+    <Postscript>Консультация по сезонной аллергии</Postscript>
+    <Status>COMPLETED</Status>
+  </OnlineAppointment>
+  <OnlineAppointment>
+    <Link>https://neuro-consult.com</Link>
+    <ChatCode>991122</ChatCode>
+    <AppointmentId>20</AppointmentId>
+    <PatientId>7</PatientId>
+    <DoctorId>4</DoctorId>
+    <AppointmentDate>2024-10-05T00:00:00</AppointmentDate>
+    <StartTime>17:00:00</StartTime>
+    <EndTime>17:50:00</EndTime>
+    <Postscript>Онлайн консультация по остеохондрозу шеи</Postscript>
+    <Status>CANCELLED</Status>
+  </OnlineAppointment>
+  <OnlineAppointment>
+    <Link>https://gastro-online.ru</Link>
+    <ChatCode>554433</ChatCode>
+    <AppointmentId>21</AppointmentId>
+    <PatientId>9</PatientId>
+    <DoctorId>6</DoctorId>
+    <AppointmentDate>2024-09-10T00:00:00</AppointmentDate>
+    <StartTime>10:00:00</StartTime>
+    <EndTime>11:00:00</EndTime>
+    <Postscript>Обсуждение диеты при панкреатите</Postscript>
+    <Status>COMPLETED</Status>
+  </OnlineAppointment>
+  <OnlineAppointment>
+    <Link>https://cardio-online.org</Link>
+    <ChatCode>112233</ChatCode>
+    <AppointmentId>26</AppointmentId>
+    <PatientId>5</PatientId>
+    <DoctorId>3</DoctorId>
+    <AppointmentDate>2024-12-18T00:00:00</AppointmentDate>
+    <StartTime>13:30:00</StartTime>
+    <EndTime>14:15:00</EndTime>
+    <Postscript>Онлайн-контроль гипертонии</Postscript>
+    <Status>SCHEDULED</Status>
+  </OnlineAppointment>
+  <OnlineAppointment>
+    <Link>https://therapist-online.com</Link>
+    <ChatCode>998877</ChatCode>
+    <AppointmentId>30</AppointmentId>
+    <PatientId>1</PatientId>
+    <DoctorId>1</DoctorId>
+    <AppointmentDate>2024-11-30T00:00:00</AppointmentDate>
+    <StartTime>16:00:00</StartTime>
+    <EndTime>17:00:00</EndTime>
+    <Postscript>Онлайн консультация по головным болям</Postscript>
+    <Status>SCHEDULED</Status>
+  </OnlineAppointment>
 </ArrayOfAppointment>
