@@ -45,5 +45,11 @@ namespace Online_Doctor_Appointment_System
             AppointmentWindow appWin = new AppointmentWindow();
             appWin.Show();
         }
+
+        private void Statistic_Click(object sender, RoutedEventArgs e)
+        {
+            StatisticWindow statWin = new StatisticWindow();
+            statWin.Show();
+        }
     }
 }

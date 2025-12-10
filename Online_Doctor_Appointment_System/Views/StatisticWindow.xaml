@@ -1,0 +1,136 @@
+﻿<Window x:Class="Online_Doctor_Appointment_System.Views.StatisticWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Online_Doctor_Appointment_System.Views"
+        mc:Ignorable="d"
+        Title="Анализ эффективности" Height="720" Width="1150" WindowState="Maximized">
+    <Grid Background="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionBrushKey}}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Первый GroupBox -->
+            <RowDefinition Height="Auto"/>
+            <!-- Второй GroupBox -->
+            <RowDefinition Height="Auto"/>
+            <!-- Кнопки -->
+            <RowDefinition Height="*"/>
+            <!-- Запасное пространство -->
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="135"/>
+            <ColumnDefinition Width="345"/>
+            <ColumnDefinition Width="*"/>
+            <!-- DataGrid займет всё оставшееся пространство -->
+        </Grid.ColumnDefinitions>
+
+        <!-- Первый GroupBox с данными -->
+        <GroupBox Grid.Row="0" Grid.Column="0" Header="Весоые коэффиценты" Margin="5" FontSize="16" Foreground="#FF7B16B6" BorderBrush="#FF7B16B6" Grid.ColumnSpan="2">
+            <StackPanel Margin="10">
+                <!-- 4 TextBox в 2 колонки -->
+                <Grid Margin="0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Левый столбец -->
+                    <StackPanel Grid.Row="0" Grid.Column="0" Margin="0,5">
+                        <Label Content="Вес рейтинга" FontSize="16" Foreground="#FF7B16B6"/>
+                        <TextBox Style="{StaticResource PrimaryTB}" Name="RatingTB"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,5">
+                        <Label Content="Вес выполненных записей" FontSize="16" Foreground="#FF7B16B6"/>
+                        <TextBox Style="{StaticResource PrimaryTB}" Name="PatronymicTB"/>
+                    </StackPanel>
+
+                    <!-- Правый столбец -->
+                    <StackPanel Grid.Row="0" Grid.Column="2" Margin="0,5">
+                        <Label Content="Вес стажа" FontSize="16" Foreground="#FF7B16B6"/>
+                        <TextBox Style="{StaticResource PrimaryTB}" Name="ExperienceTB"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="1" Grid.Column="2" Margin="0,5">
+                        <Label Content="Вес времени ожидания" FontSize="16" Foreground="#FF7B16B6"/>
+                        <TextBox Style="{StaticResource PrimaryTB}" Name="WaitingTimeTB"/>
+                    </StackPanel>
+                </Grid>
+                <Button Content="?"
+                    ToolTip="Справка весовых коэффицентов"
+                    Name="HelpBtn"
+                    Style="{StaticResource PrimaryBtn}"
+                    Padding="5" 
+                    Width="30"
+                    HorizontalAlignment="Right"
+                    FontSize="16" />
+            </StackPanel>
+        </GroupBox>
+
+        <!-- Кнопки под GroupBox -->
+        <StackPanel Grid.Row="2" Grid.Column="0" Margin="5,5,5,5.4" Grid.ColumnSpan="2">
+            <UniformGrid Columns="2" Margin="0,10">
+                <Button Content="Добавить"
+                    Name="AddPersonBtn"
+                    Style="{StaticResource PrimaryBtn}"
+                    Margin="5"
+                    Padding="15,7" 
+                    FontSize="14" />
+                <Button Content="Изменить"
+                    Name="UpdatePersonBtn"
+                    Style="{StaticResource SuccessBtn}"
+                    Margin="5"
+                    Padding="15,7" 
+                    FontSize="14" />
+                <Button Content="Очистить"
+                    Name="ClearTextFildsBtn"
+                    Style="{StaticResource WarningBtn}"
+                    Margin="5"
+                    Padding="15,7" 
+                    FontSize="14" />
+                <Button Content="Удалить"
+                    Name="DeletePersonBtn"
+                    Style="{StaticResource DangerBtn}"
+                    Margin="5"
+                    Padding="15,7" 
+                    FontSize="14" />
+            </UniformGrid>
+        </StackPanel>
+
+        <!-- DataGrid -->
+        <DataGrid Grid.Row="0" Grid.Column="2" Grid.RowSpan="4"
+              Margin="5,5,4.6,5.2" 
+              Name="EfficiencyDG" 
+              AutoGenerateColumns="False" 
+              IsReadOnly="True"
+              Style="{StaticResource PrimaryDataGrid}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Врач" Binding="{Binding Doctor.FullName}" Width="210"
+                                            HeaderStyle="{StaticResource PrimaryDataGridColumnHeader}"
+                            ElementStyle="{StaticResource PrimaryDataGridCellText}"
+                            CellStyle="{StaticResource PrimaryDataGridCell}"/>
+                <DataGridTextColumn Header="Оценка эффективности" Binding="{Binding EfficiencyScore}" Width="120"
+                                            HeaderStyle="{StaticResource PrimaryDataGridColumnHeader}"
+                            ElementStyle="{StaticResource PrimaryDataGridCellText}"
+                            CellStyle="{StaticResource PrimaryDataGridCell}"/>
+                <DataGridTextColumn Header="% выполненных записей" Binding="{Binding SuccessRate, StringFormat={}{0}%}" Width="150"
+                                            HeaderStyle="{StaticResource PrimaryDataGridColumnHeader}"
+                            ElementStyle="{StaticResource PrimaryDataGridCellText}"
+                            CellStyle="{StaticResource PrimaryDataGridCell}"/>
+                <DataGridTextColumn Header="Среднее время приема" Binding="{Binding AverageDuration, StringFormat={}{0} мин}" Width="120"
+                                            HeaderStyle="{StaticResource PrimaryDataGridColumnHeader}"
+                            ElementStyle="{StaticResource PrimaryDataGridCellText}"
+                            CellStyle="{StaticResource PrimaryDataGridCell}"/>
+                <DataGridTextColumn Header="Всего записей" Binding="{Binding TotalAppointments}" Width="*"
+                                            HeaderStyle="{StaticResource PrimaryDataGridColumnHeader}"
+                            ElementStyle="{StaticResource PrimaryDataGridCellText}"
+                            CellStyle="{StaticResource PrimaryDataGridCell}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

@@ -27,7 +27,7 @@
         </Button>
         <Button Margin="20" Grid.Row="3" Content="Статистика"  
                 FontSize="20" Name="Statistic"
-                Style="{StaticResource PrimaryBtn}">
+                Style="{StaticResource PrimaryBtn}" Click="Statistic_Click">
         </Button>
     </Grid>
 </Window>

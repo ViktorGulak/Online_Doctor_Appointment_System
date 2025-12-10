@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\AnalyticsModels\DoctorEfficiency.cs" />
     <Compile Include="Models\Disease.cs" />
     <Compile Include="Models\Doctor.cs" />
     <Compile Include="Models\HomeVisitAppointment.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="Repositories\XmlAppointmentRepository.cs" />
     <Compile Include="Repositories\XmlDoctorRepositoty.cs" />
     <Compile Include="Repositories\XmlPatientRepository.cs" />
+    <Compile Include="Services\AnalyticsServices\DoctorEfficiencyAnalyzer.cs" />
     <Compile Include="Services\AppointmentService.cs" />
     <Compile Include="Services\DoctorService.cs" />
     <Compile Include="Services\PatientService.cs" />
@@ -81,6 +83,9 @@
     </Compile>
     <Compile Include="Views\PatientWindow.xaml.cs">
       <DependentUpon>PatientWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StatisticWindow.xaml.cs">
+      <DependentUpon>StatisticWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\AppointmentWindow.xaml">
       <SubType>Designer</SubType>
@@ -120,6 +125,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\PatientWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\StatisticWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
