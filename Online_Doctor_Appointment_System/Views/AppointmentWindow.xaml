@@ -41,7 +41,7 @@
                             <Label Content="Пациент" FontSize="16" Foreground="#FF7B16B6"/>
                             <ComboBox Style="{StaticResource PrimaryCB}" Name="PatFullNameCB"
                                 TextSearch.TextPath="ShortName"
-                                IsEditable="True"/>
+                                IsEditable="True" SelectionChanged="PatFullNameCB_SelectionChanged"/>
                         </StackPanel>
                         <StackPanel Margin="0,5">
                             <Label Content="Диагноз" FontSize="16" Foreground="#FF7B16B6"/>

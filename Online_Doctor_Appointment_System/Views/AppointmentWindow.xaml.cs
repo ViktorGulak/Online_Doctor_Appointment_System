@@ -9,12 +9,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Online_Doctor_Appointment_System.Views
 {
@@ -35,9 +29,9 @@ namespace Online_Doctor_Appointment_System.Views
             InitializeComponent();
 
             // Инициализация сервисов
-            var appointmentRepo = new XmlAppointmentRepository();
-            var doctorRepo = new XmlDoctorRepository();
-            var patientRepo = new XmlPatientRepository();
+            XmlAppointmentRepository appointmentRepo = new XmlAppointmentRepository();
+            XmlDoctorRepository doctorRepo = new XmlDoctorRepository();
+            XmlPatientRepository patientRepo = new XmlPatientRepository();
 
             _doctorService = new DoctorService(doctorRepo);
             _patientService = new PatientService(patientRepo);
@@ -70,15 +64,15 @@ namespace Online_Doctor_Appointment_System.Views
 
         private void LoadDoctors()
         {
-            var doctors = _doctorService.GetAllDoctors();
+            List<Doctor> doctors = _doctorService.GetAllDoctors();
             ProfDocCB.ItemsSource = doctors;
-            ProfDocCB.DisplayMemberPath = "FullName";
+            ProfDocCB.DisplayMemberPath = "DoctorProfession";
             ProfDocCB.SelectedValuePath = "PersonId";
         }
 
         private void LoadPatients()
         {
-            var patients = _patientService.GetAllPatients();
+            List<Patient> patients = _patientService.GetAllPatients();
             PatFullNameCB.ItemsSource = patients;
             PatFullNameCB.DisplayMemberPath = "FullName";
             PatFullNameCB.SelectedValuePath = "PersonId";
@@ -597,6 +591,13 @@ namespace Online_Doctor_Appointment_System.Views
             {
                 RecordsDG.ItemsSource = _allAppointments;
             }
+        }
+
+        private void PatFullNameCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Patient selectdPat = PatFullNameCB.SelectedItem as Patient;
+            if (selectdPat == null) return;
+            DiagnosisTB.Text = selectdPat.DiseaseTitle;
         }
     }
 }

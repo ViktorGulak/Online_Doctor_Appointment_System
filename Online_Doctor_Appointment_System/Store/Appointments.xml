@@ -265,6 +265,30 @@
     <Postscript>Повторный прием по гастриту</Postscript>
     <Status>COMPLETED</Status>
   </InPersonAppointment>
+  <InPersonAppointment>
+    <HospitalTitle>Городская поликлиника № 1</HospitalTitle>
+    <CabinetNumber>29б</CabinetNumber>
+    <AppointmentId>31</AppointmentId>
+    <PatientId>5</PatientId>
+    <DoctorId>1</DoctorId>
+    <AppointmentDate>2024-12-01T00:00:00</AppointmentDate>
+    <StartTime>13:00:00</StartTime>
+    <EndTime>16:00:00</EndTime>
+    <Postscript>Назначение курсового лечения</Postscript>
+    <Status>COMPLETED</Status>
+  </InPersonAppointment>
+  <InPersonAppointment>
+    <HospitalTitle>Хирургическое отделение</HospitalTitle>
+    <CabinetNumber>210</CabinetNumber>
+    <AppointmentId>33</AppointmentId>
+    <PatientId>2</PatientId>
+    <DoctorId>10</DoctorId>
+    <AppointmentDate>2024-01-20T00:00:00</AppointmentDate>
+    <StartTime>10:00:00</StartTime>
+    <EndTime>11:00:00</EndTime>
+    <Postscript>Предоперационный осмотр</Postscript>
+    <Status>COMPLETED</Status>
+  </InPersonAppointment>
   <OnlineAppointment>
     <Link>https://online-medic.ru</Link>
     <ChatCode>117325</ChatCode>
@@ -355,6 +379,18 @@
     <AppointmentId>30</AppointmentId>
     <PatientId>1</PatientId>
     <DoctorId>4</DoctorId>
+    <AppointmentDate>2024-11-30T00:00:00</AppointmentDate>
+    <StartTime>16:00:00</StartTime>
+    <EndTime>17:00:00</EndTime>
+    <Postscript>Онлайн консультация по головным болям</Postscript>
+    <Status>SCHEDULED</Status>
+  </OnlineAppointment>
+  <OnlineAppointment>
+    <Link>https://therapist-online.com</Link>
+    <ChatCode>578912</ChatCode>
+    <AppointmentId>32</AppointmentId>
+    <PatientId>1</PatientId>
+    <DoctorId>8</DoctorId>
     <AppointmentDate>2024-11-30T00:00:00</AppointmentDate>
     <StartTime>16:00:00</StartTime>
     <EndTime>17:00:00</EndTime>

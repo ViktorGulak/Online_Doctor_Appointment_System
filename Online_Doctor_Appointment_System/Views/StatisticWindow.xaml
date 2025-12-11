@@ -47,7 +47,7 @@
 
                     <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,5">
                         <Label Content="Вес выполненных записей" FontSize="16" Foreground="#FF7B16B6"/>
-                        <TextBox Style="{StaticResource PrimaryTB}" Name="PatronymicTB"/>
+                        <TextBox Style="{StaticResource PrimaryTB}" Name="CompletedRecTB"/>
                     </StackPanel>
 
                     <!-- Правый столбец -->
@@ -62,44 +62,90 @@
                     </StackPanel>
                 </Grid>
                 <Button Content="?"
-                    ToolTip="Справка весовых коэффицентов"
-                    Name="HelpBtn"
-                    Style="{StaticResource PrimaryBtn}"
-                    Padding="5" 
-                    Width="30"
-                    HorizontalAlignment="Right"
-                    FontSize="16" />
+        Name="HelpBtn"
+        Style="{StaticResource PrimaryBtn}"
+        Padding="5" 
+        Width="30"
+        ToolTip="Открыть справку весовых коэффицентов"
+        HorizontalAlignment="Right"
+        FontSize="16" Click="HelpBtn_Click"
+        >
+
+            <Button.Resources>
+                <Popup x:Key="HelpPopup" 
+                    PlacementTarget="{Binding ElementName=HelpBtn}"
+                    StaysOpen="False"
+                    PopupAnimation="Fade"
+                    AllowsTransparency="True"
+                    HorizontalOffset="0"
+                    VerticalOffset="0"
+                    >
+                            <Border Background="White" 
+                    BorderBrush="#FF7B16B6" 
+                    BorderThickness="1"
+                    CornerRadius="3"
+                    Padding="10"
+                    >
+                                <StackPanel MaxWidth="300">
+                                    <TextBlock Text="Справка по весовым коэффициентам:" 
+                               FontWeight="Bold"
+                               Foreground="#FF7B16B6"
+                               Margin="0,0,0,5"/>
+                                    <TextBlock Foreground="#FF7B16B6" Text="1. Входные данные должны быть числами в виде десятичных дробей;" 
+                               TextWrapping="Wrap"/>
+                                    <TextBlock Foreground="#FF7B16B6" Text="2. Для эффективного найма сотрудников, повысьте коэффицент стажа;" 
+                               TextWrapping="Wrap"/>
+                                    <TextBlock Foreground="#FF7B16B6" Text="3. Для премирования повысьте коэффицент выполненных записей;" 
+                               TextWrapping="Wrap"
+                               Margin="0,3,0,0"/>
+                                    <TextBlock Foreground="#FF7B16B6" Text="4. Для оптимизации расписания повысьте коэффицент времени ожидания;" 
+                               TextWrapping="Wrap"
+                               Margin="0,3,0,0"/>
+                                    <TextBlock Foreground="#FF7B16B6" Text="5. Сумма всех коэффицентов должна быть равной 1." 
+                               TextWrapping="Wrap"
+                               Margin="0,3,0,0"/>
+                                    <Button Content="Закрыть" 
+                                    Style="{StaticResource WarningBtn}"
+                                    Click="ClosePopup_Click"
+                                    HorizontalAlignment="Right"
+                                    Margin="0,10,0,0"
+                                    Padding="5"
+                                    FontSize="14"/>
+                                </StackPanel>
+                            </Border>
+                        </Popup>
+                    </Button.Resources>
+                </Button>
+
+                <StackPanel Margin="0 10 0 0">
+                    <TextBlock Margin="0 10 0 0">
+                        <Run FontSize="20" FontWeight="Bold">Процент рейтинга:</Run>
+                        <Run FontSize="18" FontWeight="Bold" Name="RatingPercentText">0</Run>
+                    </TextBlock>
+                    <TextBlock Margin="0 10 0 0">
+                        <Run FontSize="20" FontWeight="Bold">Процент стажа:</Run>
+                        <Run FontSize="18" FontWeight="Bold" Name="ExpPercentText">0</Run>
+                    </TextBlock>
+                    <TextBlock Margin="0 10 0 0">
+                        <Run FontSize="20" FontWeight="Bold">Процент записей:</Run>
+                        <Run FontSize="18" FontWeight="Bold" Name="CompRecPercentText">0</Run>
+                    </TextBlock>
+                    <TextBlock Margin="0 10 0 0">
+                        <Run FontSize="20" FontWeight="Bold">Процент времени:</Run>
+                        <Run FontSize="18" FontWeight="Bold" Name="WaitTimePercentText">0</Run>
+                    </TextBlock>
+                </StackPanel>
             </StackPanel>
         </GroupBox>
 
         <!-- Кнопки под GroupBox -->
         <StackPanel Grid.Row="2" Grid.Column="0" Margin="5,5,5,5.4" Grid.ColumnSpan="2">
-            <UniformGrid Columns="2" Margin="0,10">
-                <Button Content="Добавить"
-                    Name="AddPersonBtn"
+            <Button Content="Расчитать"
+                    Name="CalcStatisticBtn"
                     Style="{StaticResource PrimaryBtn}"
                     Margin="5"
                     Padding="15,7" 
-                    FontSize="14" />
-                <Button Content="Изменить"
-                    Name="UpdatePersonBtn"
-                    Style="{StaticResource SuccessBtn}"
-                    Margin="5"
-                    Padding="15,7" 
-                    FontSize="14" />
-                <Button Content="Очистить"
-                    Name="ClearTextFildsBtn"
-                    Style="{StaticResource WarningBtn}"
-                    Margin="5"
-                    Padding="15,7" 
-                    FontSize="14" />
-                <Button Content="Удалить"
-                    Name="DeletePersonBtn"
-                    Style="{StaticResource DangerBtn}"
-                    Margin="5"
-                    Padding="15,7" 
-                    FontSize="14" />
-            </UniformGrid>
+                    FontSize="14" Click="CalcStatisticBtn_Click" />
         </StackPanel>
 
         <!-- DataGrid -->

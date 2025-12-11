@@ -30,21 +30,21 @@ namespace Online_Doctor_Appointment_System.Services.AnalyticsServices
          double successRateWeight = 0.35,
          double waitTimeWeight = 0.1)
         {
-            var doctors = _doctorService.GetAllDoctors();
-            var appointments = _appointmentRepository.GetAll();
+            List<Doctor> doctors = _doctorService.GetAllDoctors();
+            List<Appointment> appointments = _appointmentRepository.GetAll();
 
-            var efficiencies = new List<DoctorEfficiency>();
+            List<DoctorEfficiency> efficiencies = new List<DoctorEfficiency>();
 
             foreach (var doctor in doctors)
             {
-                var doctorAppointments = appointments
+                List<Appointment> doctorAppointments = appointments
                     .Where(a => a.DoctorId == doctor.PersonId)
                     .ToList();
 
                 if (doctorAppointments.Count == 0)
                     continue;
 
-                // 1. Рассчитываем процент успешных записей
+                // 1. Рассчитываем процент выполненых записей
                 int totalAppointments = doctorAppointments.Count;
                 int successfulAppointments = doctorAppointments
                     .Count(a => a.Status == AppointmentStatus.COMPLETED);
