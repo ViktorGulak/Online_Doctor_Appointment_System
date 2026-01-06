@@ -160,7 +160,11 @@
                                             HeaderStyle="{StaticResource PrimaryDataGridColumnHeader}"
                             ElementStyle="{StaticResource PrimaryDataGridCellText}"
                             CellStyle="{StaticResource PrimaryDataGridCell}"/>
-                <DataGridTextColumn Header="Оценка эффективности" Binding="{Binding EfficiencyScore}" Width="120"
+                <DataGridTextColumn Header="Всего записей" Binding="{Binding TotalAppointments}" Width="150"
+                                            HeaderStyle="{StaticResource PrimaryDataGridColumnHeader}"
+                            ElementStyle="{StaticResource PrimaryDataGridCellText}"
+                            CellStyle="{StaticResource PrimaryDataGridCell}"/>
+                <DataGridTextColumn Header="Выполненные записи" Binding="{Binding SuccessfulAppointments}" Width="160"
                                             HeaderStyle="{StaticResource PrimaryDataGridColumnHeader}"
                             ElementStyle="{StaticResource PrimaryDataGridCellText}"
                             CellStyle="{StaticResource PrimaryDataGridCell}"/>
@@ -168,11 +172,11 @@
                                             HeaderStyle="{StaticResource PrimaryDataGridColumnHeader}"
                             ElementStyle="{StaticResource PrimaryDataGridCellText}"
                             CellStyle="{StaticResource PrimaryDataGridCell}"/>
-                <DataGridTextColumn Header="Среднее время приема" Binding="{Binding AverageDuration, StringFormat={}{0} мин}" Width="120"
+                <DataGridTextColumn Header="Среднее время приема" Binding="{Binding AverageDuration, StringFormat={}{0} мин}" Width="150"
                                             HeaderStyle="{StaticResource PrimaryDataGridColumnHeader}"
                             ElementStyle="{StaticResource PrimaryDataGridCellText}"
                             CellStyle="{StaticResource PrimaryDataGridCell}"/>
-                <DataGridTextColumn Header="Всего записей" Binding="{Binding TotalAppointments}" Width="*"
+                <DataGridTextColumn Header="Оценка эффективности" Binding="{Binding EfficiencyScore}" Width="*"
                                             HeaderStyle="{StaticResource PrimaryDataGridColumnHeader}"
                             ElementStyle="{StaticResource PrimaryDataGridCellText}"
                             CellStyle="{StaticResource PrimaryDataGridCell}"/>
